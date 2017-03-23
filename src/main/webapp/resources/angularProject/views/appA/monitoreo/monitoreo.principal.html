@@ -1,0 +1,351 @@
+
+
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<!-- Start all trigger -->
+		<div class="panel">
+			<!-- START PARAMETERS -->
+			<!--titulo hide-content="hideContent" parameter="parametros"/-->
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h4>EJEMPLO DE CONSUMO DE SERVICIOS REST Y USO DE TABLA
+						DINAMICA</h4>
+				</div>
+				<!-- /.pull-left -->
+				<div class="pull-right">
+					<button data-tooltip data-collapse-panel class="btn btn-sm"
+						data-action="collapse" data-toggle="tooltip" data-placement="top"
+						data-title="Ocultar">
+						<i class="fa fa-angle-up"></i>
+					</button>
+				</div>
+				<!-- /.pull-right -->
+				<div class="clearfix"></div>
+			</div>
+			<!-- /.panel-heading -->
+
+			<div class="panel-body">
+				<label class="text-strong">Documentacion de
+					pld-advanced-table </label> <br /> <br />
+				<p>La directiva se compone de 4 atributos que son indispensables
+					para su correcto funcionamiento</p>
+				<br />
+				<p>key = Es la llave que asociada al contenedor de datos del
+					backend(Revisar la clase TableContainer en el backend)</p>
+				<input type="text" disabled="true" value="principal"></input>
+				<p>option = configura las herramientas disponibles de la tabla,
+					agrega filtros a columnas, habilita/ deshabilita descarga de excel,
+					busqueda, pages etc</p>
+				<p class="text-strong">{{configTable | json}}</p>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-1">
+						<div ng-if="configTable.detalle == true"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.detalle=!configTable.detalle"><i
+								class="fa fa-check-square-o"
+								style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+						<div ng-if="configTable.detalle == false"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.detalle=!configTable.detalle"><i
+								class="fa fa-times" style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+					</div>
+					<div class="col-md-10">
+						<p>detalle: habilita/desabilita la herramienta del detalle</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-1">
+						<div ng-if="configTable.check == true"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.check=!configTable.check"><i
+								class="fa fa-check-square-o"
+								style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+						<div ng-if="configTable.check == false"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.check=!configTable.check"><i
+								class="fa fa-times" style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+					</div>
+					<div class="col-md-10">
+						<p>check: habilita/desabilita la herramienta check</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-1">
+						<div ng-if="configTable.reporte == true"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.reporte=!configTable.reporte"><i
+								class="fa fa-check-square-o"
+								style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+						<div ng-if="configTable.reporte == false"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.reporte=!configTable.reporte"><i
+								class="fa fa-times" style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+					</div>
+					<div class="col-md-10">
+						<p>reporte: habilita/desabilita la herramienta del reporte</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-1">
+						<div ng-if="configTable.search == true"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.search=!configTable.search"><i
+								class="fa fa-check-square-o"
+								style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+						<div ng-if="configTable.search == false"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.search=!configTable.search"><i
+								class="fa fa-times" style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+					</div>
+					<div class="col-md-10">
+						<p>search: habilita/desabilita la busqueda en la tabla</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-1">
+						<div ng-if="configTable.excel == true"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.excel=!configTable.excel"><i
+								class="fa fa-check-square-o"
+								style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+						<div ng-if="configTable.excel == false"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#" ng-click="configTable.excel=!configTable.excel"><i
+								class="fa fa-times" style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+					</div>
+					<div class="col-md-10">
+						<p>excel: habilita/desabilita la descarga de excel de la tabla</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-1">
+						<div ng-if="configTable.pagination == true"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#"
+								ng-click="configTable.pagination=!configTable.pagination"><i
+								class="fa fa-check-square-o"
+								style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+						<div ng-if="configTable.pagination == false"
+							class="fa-hover col-md-3 col-sm-4">
+							<a href="#"
+								ng-click="configTable.pagination=!configTable.pagination"><i
+								class="fa fa-times" style="color: #8CC152; font-size: 20px;"></i></a>
+						</div>
+					</div>
+					<div class="col-md-10">
+						<p>pagination: habilita/desabilita los botones de paginacion
+							en la seccion inferior de la tabla</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-2">
+						<input type="text" ng-model="configTable.tableName"></input>
+					</div>
+					<div class="col-md-9">
+						<p>tableName: Configura el nombre dado el archivo de la
+							descarga de excel, el nombre no debe de tener la extension del
+							mismo, pues esta se asigna automaticamente como *.xls</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-10">
+						<p>filters: Objeto donde se configuran los filtros a asignar
+							en la celdas de la tabla, la busqueda se realiza por medio del
+							nombre de la columna quitando espacios y acentos. los filtros
+							disponibles con:</p>
+						<p>-->currency:para montos</p>
+						<p>-->date:para fechas</p>
+						<p>-->percent:para porcentajes</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-10">
+						<p>disabledcollumns: Oculta columnas de la tabla, en base el
+							nombre de la cabecera de dicha columna eliminando espacios y
+							simbolos, en este caso se estan quitando las columnas de Mes y
+							An&#771;o-->['Mes','Ano']</p>
+
+					</div>
+				</div>
+				<p>values = variable que almacena las variables de la tabla,
+					registros a desplegar,pagina actual, total de registros,texto de
+					busqueda,ordenamiento,tabla paginada/no paginada,estatus y errores.</p>
+				<div class="row">
+					<b>[pageSize : {{valuesTable.pageSize}}</b> <b>--currentPage :
+						{{valuesTable.currentPage}}</b> <b>--totalRows :
+						{{valuesTable.totalRows}}</b> <b>--searchText :
+						{{valuesTable.searchText}}</b> <b>--reverse :
+						{{valuesTable.reverse}}</b> <b>--paginated :
+						{{valuesTable.paginated}}]</b> <br />
+					<p>Manejo de errores</p>
+					<b>--tableMessage : {{valuesTable.tableMessage}}]</b>
+
+				</div>
+				<p>*la paginacion se activa automaticamente en consultas con mas
+					de 1000 registros, revisar "aplication.properties" para mas
+					configuraciones del sistema</p>
+				<p>reload = Bandera usada para disparar la recarga de datos
+					desde el contenedor en el Backend, y reestablece a la variable
+					"values" a sus valores por default. reload=true -- recarga de info
+					desde el contenedor, false= valor por default. Presiona el
+					siguiente boton recargar</p>
+				<button id="reload" type="button" class="btn btn-success btn-form"
+					ng-click="reloadTable=true">Recarga info</button>
+				<br />
+
+
+
+			</div>
+
+			<div class="panel-body">
+				<h4></h4>
+				<!-- START PARAMETERS IMPUT -->
+				<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<!-- <div class="col-md-2 col-sm-2" style="text-align:right;"> -->
+					<!-- <label for="tipoReporte">Tipo Reporte</label> -->
+					<!-- </div> -->
+					<!-- <div class="col-md-2 col-sm-2">													 -->
+					<!-- <select id="tipoReporte" class="form-control" required ng-model="tipoReporte" ng-options="item.IdTipoReporte as item.NombreReporte for item in catTipoReporte"></select> -->
+					<!-- </div> -->
+					<div class="col-md-offset-2 col-md-1 col-sm-2"
+						style="text-align: center;">
+						<label class="text-strong" for="mes">Mes</label>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<mes></mes>
+					</div>
+					<div class="col-md-1 col-sm-2" style="text-align: center;">
+						<label class="text-strong" for="anio">An&#771;o</label>
+					</div>
+					<div class="col-md-2 col-sm-3">
+						<anio></anio>
+					</div>
+					<div class="col-md-1 col-sm-2">
+						<button id="buscar" type="button" class="btn btn-success btn-form"
+							click-once ng-disabled="valuesTable.tableMessage.showAnimation"
+							ng-click="callData()">Buscar</button>
+					</div>
+				</div>
+				<br />
+
+				<!-- END PARAMETERS IMPUT -->
+				<br />
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+<!-- END PARAMETERS -->
+<!--div class="row">
+	<b>--reloadTable : {{reloadTable}}</b>
+	<b>--pageSize : {{valuesTable.pageSize}}</b>
+	<b>--currentPage : {{valuesTable.currentPage}}</b>
+	<b>--totalRows : {{valuesTable.totalRows}}</b>
+	<b>--searchText : {{valuesTable.searchText}}</b>
+	<b>--reverse : {{valuesTable.reverse}}</b>
+	<b>--paginated : {{valuesTable.paginated}}</b>
+</div-->
+
+
+<div class="row"
+	ng-show="valuesTable.tableMessage.showAnimation==true || valuesTable.tableMessage.state.show==true || valuesTable.totalRows>0">
+	<div class="col-sm-12">
+		<!-- Start repeater -->
+		<div class="panel rounded shadow no-overflow">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h3 class="panel-title">Ejemplo de tabla dinamica</h3>
+				</div>
+				<div class="pull-right">
+					<button data-tooltip data-collapse-panel class="btn btn-sm"
+						data-action="collapse" data-container="body" data-toggle="tooltip"
+						data-placement="top" data-title="Ocultar">
+						<i class="fa fa-angle-up"></i>
+					</button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<pld-advanced-table reload="reloadTable" options="configTable"
+					values="valuesTable" key="'principal'"></pld-advanced-table>
+			</div>
+
+			<!--div class="panel-body">
+				<pld-advanced-table reload="reloadTable" options="configTable" values="valuesTable2" key="'principal'"></pld-advanced-table>
+			</div-->
+		</div>
+		<br></br>
+		<h3 class="panel-title">Ejemplo de consulta simple y
+			actualizacion con descarga de excel</h3>
+
+		<br></br>
+		<div class="row">
+			<div class="col-md-offset-11 col-md-1">
+				<button class="btn btn-sm" file-download="myBlob"
+					file-name="'parametros.xls'" ng-click="downloadExcel()">
+					<a href="#"> <i class="fa fa-excel-o">Excel</i>
+					</a>
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<label class="text-strong">{{data.jsonHeaders.Regla}}</label>
+				<p>{{data.jsonResult[0].Regla}}</p>
+			</div>
+			<div class="col-md-8">
+				<label class="text-strong">{{data.jsonHeaders.Descripcion}}</label>
+				<p>{{data.jsonResult[0].Descripcion}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<label class="text-strong">{{data.jsonHeaders.W}}:</label> <input
+					type="text" id="w" ng-model="w" />
+			</div>
+			<div class="col-md-3">
+				<label class="text-strong">{{data.jsonHeaders.X}}:</label> <input
+					type="text" id="x" ng-model="x" />
+			</div>
+			<div class="col-md-3">
+				<label class="text-strong">{{data.jsonHeaders.Y}}:</label> <input
+					type="text" id="y" ng-model="y" />
+
+			</div>
+			<div class="col-md-3">
+				<label class="text-strong">{{data.jsonHeaders.Z}}:</label> <input
+					type="text" id="z" ng-model="z" />
+			</div>
+		</div>
+		<br></br>
+		<div class="row">
+			<div class="col-md-offset-5 col-md-2">
+				<button id="updateParameter" type="button"
+					ng-click="updateParameters()">Actualizar valores</button>
+			</div>
+		</div>
+		<br></br>
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+				<pld-message configuration="message"></pld-message>
+			</div>
+		</div>
+
+	</div>
+</div>
+<br />
+<br />

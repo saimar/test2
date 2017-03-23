@@ -1,0 +1,73 @@
+{"headers":[
+	{"name":"Riesgo","type":12},
+	{"name":"Amazonas","type":2},
+	{"name":"Ancash","type":2},
+	{"name":"Apurimac","type":2},
+	{"name":"Arequipa","type":2},
+	{"name":"Ayacucho","type":2},
+	{"name":"Cajamarca","type":2},
+	{"name":"Callao","type":2},
+	{"name":"Cusco","type":2},
+	{"name":"Huancavelica","type":2},
+	{"name":"Huanuco","type":2},
+	{"name":"Ica","type":2},
+	{"name":"Junin","type":2},
+	{"name":"La Libertad","type":2},
+	{"name":"Lambayeque","type":2},
+	{"name":"Lima","type":2},
+	{"name":"Loreto","type":2},
+	{"name":"Madre de Dios","type":2},
+	{"name":"Moquegua","type":2},
+	{"name":"Pasco","type":2},
+	{"name":"Piura","type":2},
+	{"name":"Puno","type":2},
+	{"name":"San Martin","type":2},
+	{"name":"Tacna","type":2},
+	{"name":"Tumbes","type":2},
+	{"name":"Ucayali","type":2}
+],
+"rowCount":3,
+"queryResult":[{
+	"fields":[
+		"Alto Riesgo",
+		"1.33",
+		"2.67",
+		"4.00",
+		"5.33",
+		"6.67",
+		"8.00",
+		"9.33",
+		"10.67",
+		"12.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00",
+		"0.00"
+	]},
+	{"fields":[
+		"Inaceptable","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","5.78","6.13","6.49","6.84","7.20",
+		"7.56","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00"
+		]},
+	{"fields":[
+		"Medio Riesgo","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","3.92","4.17",
+		"4.41","4.66","4.90","5.15","5.39","5.64","5.88","6.13"
+		]}
+],
+"message":{
+	"info":"","style":"message-info","show":false
+},
+"state":{
+	"message":"","success":false,"show":false,"styleMessage":"","styleIcon":""
+}}

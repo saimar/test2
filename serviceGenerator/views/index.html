@@ -1,0 +1,128 @@
+{% set title = 'Home' %}
+{% extends 'layout.html' %}
+{% block content %}
+
+
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <h4>Generador de Servicios</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1" data-toggle="tab">Servicios</a></li>
+        <li><a href="#section2" data-toggle="tab">Servicios REST</a></li>
+        <li><a href="#section3" data-toggle="tab">Servicios Factory</a></li>
+        <li><a href="#section4" data-toggle="tab">Controlador Angular</a></li>
+      </ul><br>
+
+    </div>
+
+    <div class="col-sm-10">
+      <!--h4><small>RECENT POSTS</small></h4-->
+      <label class="text-strong"> Completa los campos solicitados.</label>
+      <hr>
+      <div class="row">
+              <div class="col-md-3">
+                <label>URL</label>
+                 <input type="text" class="form-control" ng-model="newservice.url">
+              </div>
+              <div class="col-md-3">
+                <label>Store Procedure</label>
+                <input type="text" class="form-control" ng-model="newservice.sp">
+              </div>
+              <div class="col-md-3">
+                <label>Constante Java</label>
+                <input type="text" class="form-control" ng-model="newservice.constante">
+              </div>
+              <div class="col-md-2">
+                <label>Tipo de operacion</label>
+                <select name="multipleSelect" id="multipleSelect" class="form-control" ng-model="newservice.operacion">
+                  <option value="t">Consulta tabla</option>
+                  <option value="s">Consulta simple</option>
+                  <option value="i">Inserción</option>
+                  <option value="u">Actualización</option>
+                  <option value="d">Borrado</option>
+                </select>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-lg btn-primary" ng-click="addService()">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+              </div>
+    </div>
+    <div class="tab-content">
+			  <div class="tab-pane active" id="section1">
+          <br/>
+          <label class="text-strong">Listas de servicios</label>
+          <br/>
+          <div class="row" ng-repeat="service in services">
+              <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="service.url" readonly disabled>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="service.sp" readonly disabled>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="service.constante" readonly disabled>
+              </div>
+              <div class="col-md-3">
+                <button type="button" class="btn btn-lg btn-primary" ng-click="deleteService($index)">
+                  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </button>
+              </div>
+              <br/>
+          </div>
+				</div>
+
+				<div class="tab-pane" id="section2">
+          <br/>
+          <p>Servicios implementados en el BackEnd JAVA</p>
+          <br/>
+          <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+              <label>Nombre Servicio REST</label>
+               <input type="text" class="form-control" ng-model="restname">
+            </div>
+          </div>
+          <br/>
+
+
+          <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+              <java-code restname="restname" services="services"></java-code>
+              <!--code ng-bind="java"></code-->
+            </div>
+          </div>
+				</div>
+        <div class="tab-pane" id="section3">
+          <br/>
+          <p>Servicios factory Angular</p>
+          <br/>
+          <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+              <label>Nombre Servicio factory</label>
+               <input type="text" class="form-control" ng-model="servicename">
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+              <angular-service servicename="servicename" restname="restname" services="services"></angular-service>
+            </div>
+          </div>
+				</div>
+        <div class="tab-pane" id="section4">
+          <br/>
+          <p>Ejemplo de implementación controlador angular</p>
+          <br/>
+          <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+              <angular-controller services="services" servicename="servicename"></angular-controller>
+            </div>
+          </div>
+				</div>
+			</div>
+
+    </div>
+  </div>
+
+
+{% endblock %}

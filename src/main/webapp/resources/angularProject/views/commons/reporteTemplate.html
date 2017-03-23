@@ -1,0 +1,236 @@
+
+<!-- START PANEL -->
+
+<div class="row">
+	 <div class="col-md-12 col-sm-12">
+
+        <!-- Start collapsible panel -->
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="pull-left">
+                    <h3 class="panel-title"><span id="titulo" class="text-strong">Reporte manual</span></h3>
+                </div>
+                <div class="pull-right">
+                    <button data-tooltip data-collapse-panel class="btn btn-sm" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse"><i class="fa fa-angle-up"></i></button>
+                </div>
+                <div class="clearfix"></div>
+            </div><!-- /.panel-heading -->
+            
+            
+            
+            <div class="panel-body" >
+                <!-- h1>Analisis{{register}}</h1-->
+                <h4 ng-show="dataReporte.rowCount>0">Datos de la operacio&#769;n</h4>
+               	<br/>
+               	
+               	<div class="row" ng-show="dataReporte.rowCount>0">
+                	<div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.IdMovimiento}}</label>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].IdMovimiento}}</p>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.Poliza}}</label>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].Poliza}}</p>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.Producto}}</label>
+                    </div>
+                    <div class="col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].Producto}}</p>
+                    </div>
+                   
+                </div>
+                
+                <div class="row" ng-show="dataReporte.rowCount>0">
+                	 <div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.SubProducto}}</label>
+                   	</div>
+                   	 <div class=" col-sm-3 col-md-2">
+                   	 	<p>{{dataReporte.jsonResult[0].SubProducto}}</p>
+                   	 </div>
+                   	 <div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.IdCanal}}</label>
+                   	</div>
+                   	 <div class=" col-sm-3 col-md-2">
+                   	 	<p>{{dataReporte.jsonResult[0].IdCanal}}</p>
+                   	 </div>
+                   	 <div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.IdSucursal}}</label>
+                   	</div>
+                   	 <div class=" col-sm-3 col-md-2">
+                   	 	<p>{{dataReporte.jsonResult[0].IdSucursal}}</p>
+                   	 </div>
+                </div>
+                
+                <div class="row" ng-show="dataReporte.rowCount>0">
+                	<div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.Importe}}</label>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].Importe | currency}}</p>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.FechaOperacion}}</label>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].FechaOperacion}}</p>
+                    </div>
+                </div>
+                
+               	<br/>
+               	<h4 ng-show="dataReporte.rowCount>0">Datos del cliente</h4>
+               	<br/>
+               	
+                <div class="row" ng-show="dataReporte.rowCount>0">
+                	<div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.IdCliente}}</label>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].IdCliente}}</p>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.Nombre}}</label>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].Nombre}}</p>
+                   	</div>
+                   	<div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.ApellidoPaterno}}</label>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].ApellidoPaterno}}</p>
+                    </div>
+                    
+                </div>
+                <div class="row" ng-show="dataReporte.rowCount>0">
+                	<div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.ApellidoMaterno}}</label>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].ApellidoMaterno}}</p>
+                   	</div>
+                	<div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.FechaNacimiento}}</label>	
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].FechaNacimiento}}</p> 	
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.Nacionalidad}}</label>   	
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].Nacionalidad}}</p>
+                   	</div>
+                </div>
+                
+                <div class="row" ng-show="dataReporte.rowCount>0">
+                	<div class=" col-sm-3 col-md-2">
+                		<label class="text-strong">{{dataReporte.jsonHeaders.TipoPersona}}</label>
+                	</div>
+                	<div class=" col-sm-3 col-md-2">
+                		<p>{{dataReporte.jsonResult[0].TipoPersona}}</p>
+                	</div>
+                	<div class=" col-sm-3 col-md-2">
+                		<label class="text-strong">{{dataReporte.jsonHeaders.RFC}}</label>
+                	</div>
+                	<div class=" col-sm-3 col-md-2">
+                		<p>{{dataReporte.jsonResult[0].RFC}}</p>
+                	</div>
+                	<div class=" col-sm-3 col-md-2">
+                    	<label class="text-strong">{{dataReporte.jsonHeaders.Telefono}}</label>
+                    </div>
+                    <div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].Telefono}}</p>
+                    </div>
+                	
+                </div>
+                
+                <div class="row" ng-show="dataReporte.rowCount>0">
+                	<div class=" col-sm-4 col-md-2">
+                		<label class="text-strong">{{dataReporte.jsonHeaders.Domicilio}}</label>
+                	</div>
+                	<div class=" col-sm-8 col-md-4">
+                    	<p>{{dataReporte.jsonResult[0].Domicilio}}</p>
+                    </div>
+                	<div class=" col-sm-4 col-md-2">
+                		<label class="text-strong">{{dataReporte.jsonHeaders.Colonia}}</label>
+                	</div>
+                	<div class=" col-sm-8 col-md-4">
+                		<p>{{dataReporte.jsonResult[0].Colonia}}</p>
+                	</div>
+                	
+                </div>
+
+                <div class="row" ng-show="dataReporte.rowCount>0">
+                	<div class=" col-sm-3 col-md-2">
+                		<label class="text-strong">{{dataReporte.jsonHeaders.CiudadoPoblacion}}</label>
+                	</div>
+                	<div class=" col-sm-3 col-md-2">
+                    	<p>{{dataReporte.jsonResult[0].CiudadoPoblacion}}</p>
+                    </div>
+                	<div class=" col-sm-3 col-md-2">
+                		<label class="text-strong">{{dataReporte.jsonHeaders.Estado}}</label>
+                	</div>
+                	<div class=" col-sm-3 col-md-2">
+                		<p>{{dataReporte.jsonResult[0].Estado}}</p>
+                	</div>
+                </div>
+                
+                
+                <br/>
+                
+                <center ng-show="dataReporte.rowCount>0"><p>Ingresa una breve descripcio&#769;n y la razones para generar el reporte.</p></center>
+                <br/>
+               	
+               	 <div class="row" ng-show="dataReporte.rowCount>0">
+               	 	<div class=" col-sm-12 col-md-6">
+                    	<center><label class="text-strong">Descripcio&#769;n</label></center>
+                    	
+                    </div>
+                    <div class=" col-sm-12 col-md-6">
+                    	<center><label class="text-strong">Razones</label></center>
+                    	
+                    </div>
+                    
+               	 </div>
+               	 <div class="row" ng-show="dataReporte.rowCount>0">
+               	 	<div class=" col-sm-12 col-md-6">
+                    	<center><textarea rows="3" cols="50" maxlength="300" ng-model="descripcion"></textarea></center>
+                    </div>
+                    <div class=" col-sm-12 col-md-6">
+                    	<center><textarea rows="3" cols="50" maxlength="300" ng-model="razones"></textarea></center>
+                    </div>
+                    
+               	 </div>
+               	 <div class="row" ng-show="dataReporte.rowCount>0 && reported==false" >
+               	 	<div class="col-xs-offset-4 col-xs-4 col-md-offset-5 col-md-2">
+               	 		<center><button class="btn btn-success btn-form" ng-disabled="descripcion=='' || razones==''" ng-click="saveReport()"> Generar Reporte</button></center>
+               	 	</div>
+               	 </div>
+               	 <br/>
+               	
+               	 <div class="row">
+           			<div class="col-sm-12 col-md-offset-3 col-md-6">
+               			<pld-message configuration="messageDatosReporte"></pld-message>
+           			</div>
+       			</div>
+			</div><!-- /.panel-body -->
+			
+        </div><!-- /.panel -->
+        <!--/ End collapsible panel -->
+        
+        
+
+    </div>
+</div>
+
+<!-- END PANEL -->
+<!-- END CHARTS -->
+</body>
+</html>
+
+

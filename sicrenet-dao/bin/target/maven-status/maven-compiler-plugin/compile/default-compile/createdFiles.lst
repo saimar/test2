@@ -1,4 +1,0 @@
-com\baz\dao\App.class
-com\baz\dao\security\LoginDAO.class
-com\baz\dao\security\impl\LoginDAOImpl.class
-com\baz\dao\domain\Users.class

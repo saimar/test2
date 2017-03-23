@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-entitygen.DEFAULT_PACKAGE=model
-org.eclipse.jpt.core.platform=eclipselink2_5
-org.eclipse.jpt.jpa.core.discoverAnnotatedClasses=false
-problem.PERSISTENCE_MULTIPLE_PERSISTENCE_UNITS=ignore
-problem.PERSISTENCE_UNIT_UNSPECIFIED_CLASS=error
-problem.PERSISTENCE_UNIT_UNSPECIFIED_JAR_FILE=error
-problem.TYPE_MANAGED_BUT_NOT_LISTED_IN_PERSISTENCE_XML=warning
-workspace_validation_preferences_overridden=true

@@ -1,0 +1,13 @@
+﻿.tituloCarga {
+    font-family: Arial;
+    font-size: 10px;
+    text-align: center; 
+    background:#4cada0;
+}
+
+.contenidoCarga {
+    font-family:Arial;
+    font-size: 10px;
+    text-align: right; 
+    background:#c9dbdb;
+}

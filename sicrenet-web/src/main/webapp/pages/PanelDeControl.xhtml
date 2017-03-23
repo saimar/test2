@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+	<meta name="keywords" content="HTML,CSS,XML,JavaScript" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../Styles/PanelDeControl/StyleCustomPanelControl.css" rel="stylesheet" type="text/css" />
+</head>
+<h:body >
+	<h:outputScript library="javascript"
+		name="../../js/Scripts/PanelDeControl/ProcesoPanel.js" target="head" />
+	<ui:composition template="template/commons/Template.xhtml">
+		<ui:define name="MainContent">
+<!-- 			<p:growl id="msgs" showDetail="true" /> -->
+			       <h:form id="formMsj" prependId="false"> 
+                        
+                        <p:messages id="mensajes" showDetail="true" autoUpdate="true"  />
+                    </h:form>
+                    
+			<center style="margin-top: 1%;">
+
+					<span id="lblMensajeHerramienta"
+						style="color: Black; font-weight: bold;"></span>
+					<table id="tblTituloMain"
+						style="font: normal 10px Helvetica, Arial, sans-serif; width: 100%; display: initial">
+						<tr>
+							<td style="width: 25%; position: relative">
+								<div id="divtitulo">
+
+									<p:outputLabel for="button" value="Fecha de Corte T0:"
+										style="font: normal 10px Helvetica, Arial, 
+									sans-serif;" />
+
+									<p:calendar id="button" value="#{panelControl.dateCorte}"
+										showOn="button" pattern="dd/MM/yyyy" navigator="true"
+										timeZone="America/Mexico_City" locale="es" readonlyInput="true" immediate="true">
+										<p:ajax event="dateSelect"
+											listener="#{panelControl.timeframeEndChanged}"
+											update=":form1:toggleable" />
+									</p:calendar>
+								</div>
+							</td>
+							<td style="width: 20%; position: relative"></td>
+							<td id="tdTitle"
+								style="width: 70%; font: normal 9px Helvetica, Arial, sans-serif; font-size: medium; font-weight: bold; text-shadow: 2px 1px 1px Gray; position: relative; text-align: left"><h:outputText
+									value="PANEL DE CONTROL MENSUAL" /></td>
+							<td style="width: 25%; position: relative"></td>
+						</tr>
+					</table>
+	
+					<div style="width: 98.8%;display: none;">
+					<p:panelGrid id="idPanelGridHeader" style="width:100%;border-width: 0px;" >
+						<p:row>
+							<p:column colspan="1" rowspan="2" 
+							style="background: #626261; color: #FFF; 
+							font-family: Verdana, Geneva, sans-serif;
+							font-size: 14px; text-align: center;">Factores
+							</p:column>
+							<p:column colspan="3" id="TdCI" styleClass="AcordeonAzul_2"
+							style="text-align: center; 
+							border: 1px solid rgb(37, 117, 236); 
+							font-family: times new roman; font-weight: bold; 
+							text-shadow: 2px 1px 1px Black;">
+							<h:outputText value="I" />
+							</p:column>
+							<p:column colspan="3" id="TdCII" styleClass="AcordeonAmarillo_2"
+							style="text-align: center; 
+							margin-left: -3px; border: 1px solid rgb(167, 126, 38); 
+							font-family: times new roman; font-weight: bold; 
+							text-shadow: 2px 1px 1px Black; min-width: 333px;">
+							<h:outputText value="II" />
+							</p:column>
+							<p:column colspan="3" id="TdCIII" styleClass="AcordeonNaranja_2"
+							style="text-align: center;  
+							margin-left: -3px; border: 1px solid rgb(182, 85, 18); 
+							font-family: times new roman; font-weight: bold; 
+							text-shadow: 2px 1px 1px Black; min-width: 332px;">
+							<h:outputText value="III" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column colspan="1" style="text-align: center;  
+							cursor: pointer;" styleClass="AcordeonAzul_1">1 
+							<p:commandLink action="#{panelControl.generarPanel(1)}"
+											update=":form1:toggleable"
+											
+												onclick="renderedTR();">
+<!-- 								onclick="Waiting(true, 'Cargando Información...');"			oncomplete="Waiting(false, 'Cargando Información...');"> -->
+											<p:graphicImage alt=""
+												value="../Images/PanelDeControl/F1.png"
+												style="margin-right: 10px; width: 30px;
+									 height: 17px;">
+												<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+											</p:graphicImage>
+										</p:commandLink>
+							</p:column>
+							<p:column colspan="1" style="text-align: center; 
+							cursor: pointer;" styleClass="AcordeonAzul_2">2  
+							<p:commandLink
+											action="#{panelControl.generarPanel(1)}"
+											update=":form1:toggleable"
+											onclick="Waiting(true, 'Cargando Información...');"
+											oncomplete="Waiting(false, 'Cargando Información...');">
+											<p:graphicImage alt=""
+												value="../Images/PanelDeControl/icoAzul23.png"
+												style="margin-right: 10px; width: 17px;
+									 height: 17px;">
+												<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+											</p:graphicImage>
+										</p:commandLink>
+							</p:column>
+							<p:column colspan="1" style="text-align: center; 
+							cursor: pointer;" styleClass="AcordeonAzul_3">3 
+							<p:commandLink
+											action="#{panelControl.generarPanel(1)}"
+											update=":form1:toggleable"
+											onclick="Waiting(true, 'Cargando Información...');"
+											oncomplete="Waiting(false, 'Cargando Información...');">
+											<p:graphicImage alt=""
+												value="../Images/PanelDeControl/icoAzul23.png"
+												style="margin-right: 10px; width: 17px;
+									 height: 17px;">
+												<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+											</p:graphicImage>
+										</p:commandLink>
+							</p:column>
+							<p:column colspan="1" style="text-align: center; 
+							cursor: pointer;" styleClass="AcordeonAmarillo_1">4
+										<p:commandLink action="#{panelControl.generarPanel(2)}"
+											update=":form1:toggleable"
+											onclick="Waiting(true, 'Cargando Información...');"
+											oncomplete="Waiting(false, 'Cargando Información...');">
+											<p:graphicImage alt=""
+												value="../Images/PanelDeControl/F4.png"
+												style="margin-right: 10px; width: 30px;
+									 height: 17px;">
+												<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+											</p:graphicImage>
+										</p:commandLink>
+							</p:column>
+							<p:column colspan="1" style="text-align: center; 
+							cursor: pointer;" styleClass="AcordeonAmarillo_2">5 <p:commandLink
+											action="#{panelControl.generarPanel(2)}"
+											update=":form1:toggleable"
+											onclick="Waiting(true, 'Cargando Información...');"
+											oncomplete="Waiting(false, 'Cargando Información...');">
+											<p:graphicImage alt=""
+												value="../Images/PanelDeControl/icoAmarillo23.png"
+												style="margin-right: 10px; width: 20px;
+									 height: 17px;">
+												<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+											</p:graphicImage>
+										</p:commandLink>
+							</p:column>
+							<p:column colspan="1" style="text-align: center; 
+							cursor: pointer;" styleClass="AcordeonAmarillo_3">6 <p:commandLink
+											action="#{panelControl.generarPanel(2)}"
+											update=":form1:toggleable"
+											onclick="Waiting(true, 'Cargando Información...');"
+											oncomplete="Waiting(false, 'Cargando Información...');">
+											<p:graphicImage alt=""
+												value="../Images/PanelDeControl/icoAmarillo23.png"
+												style="margin-right: 10px; width: 20px;
+									 height: 17px;">
+												<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+											</p:graphicImage>
+										</p:commandLink>
+							</p:column>
+							
+							<p:column colspan="1" style="text-align: center; 
+							cursor: pointer;" styleClass="AcordeonNaranja_1">
+							7<p:commandLink action="#{panelControl.generarPanel(3)}"
+											update=":form1:toggleable"
+											onclick="Waiting(true, 'Cargando Información...');"
+											oncomplete="Waiting(false, 'Cargando Información...');">
+											<p:graphicImage alt=""
+												value="../Images/PanelDeControl/F7.png"
+												style="margin-right: 10px; width: 29px;
+									  height: 17px;">
+												<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+											</p:graphicImage>
+										</p:commandLink>
+										</p:column>
+							<p:column colspan="1" style="text-align: center; 
+							cursor: pointer;" styleClass="AcordeonNaranja_2">
+							8 <p:commandLink
+											action="#{panelControl.generarPanel(3)}"
+											update=":form1:toggleable"
+											onclick="Waiting(true, 'Cargando Información...');"
+											oncomplete="Waiting(false, 'Cargando Información...');">
+											<p:graphicImage alt=""
+												value="../Images/PanelDeControl/icoNaranja23.png"
+												style="margin-right: 10px; width: 17px;
+									  height: 17px;">
+												<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+											</p:graphicImage>
+										</p:commandLink>
+							</p:column>
+							<p:column colspan="1" style="text-align: center; 
+							cursor: pointer;" styleClass="AcordeonNaranja_3">
+								9
+								<p:commandLink action="#{panelControl.generarPanel(3)}"
+									update=":form1:toggleable"
+									onclick="Waiting(true, 'Cargando Información...');"
+									oncomplete="Waiting(false, 'Cargando Información...');">
+									<p:graphicImage alt=""
+										value="../Images/PanelDeControl/icoNaranja23.png"
+										style="margin-right: 10px; width: 17px;
+									  height: 17px;">
+										<!-- 									 <p:ajax event="click" listener="#{panelControl.generarPanel(2)}" update=":form1:toggleable"/> -->
+									</p:graphicImage>
+								</p:commandLink>
+							</p:column>
+
+						</p:row>
+					</p:panelGrid>
+				</div>
+				<div id="divPanelMain" style="width: 99%; overflow: auto; " onscroll="OnScrollDiv (event,this)" >
+						
+						<form>
+						<div id="idDivPanel"> 
+<!-- 						onscroll="OnScrollDiv (event,this)" style="overflow: auto;"> -->
+							<!-- 					<p:panel style="max-width:1110px;max-height:245px"> -->
+							<p:scrollPanel binding="#{panelControl.model}" id="toggleable"
+								mode="native">
+							</p:scrollPanel>
+							<!-- 						</p:panel> -->
+							</div>
+						</form>
+						<div id="divTablaMonitoreo" style="display: initial"></div>
+					</div>
+			</center>
+			<div id="divSucursalesSinTransmitir" style="height: 0px" lang="ab"
+				class="VentanaFlotante"></div>
+			<div id="divVentanaReprocesos" class="VentanaFlotante"></div>
+			<div id="divVentanaCedulas" class="VentanaFlotante"
+				style="display: none;"></div>
+			<div id="divVentanaAgendas" class="VentanaFlotanteResize"></div>
+			<div id="divVentanaCargaFileUltimasFuentes"></div>
+			<div id="divProgramarDescargas" class="VentanaFlotante"></div>
+			<div id="divVentanaMensajes" class="VentanaFlotante"></div>
+			<div id="divCargaFileComplemento" class="VentanaFlotante"></div>
+			<div id="divCargaFileComplementoNewUnitNeg" class="VentanaFlotante">
+			</div>
+			<div id="divNombreArchivoCobranza" class="VentanaFlotante"></div>
+			<div id="divArchivosFaltantesCobranza" class="VentanaFlotante">
+			</div>
+			<div id="divDetalleSaldosEI" class="VentanaFlotanteResize"></div>
+			<div id="divCalendariosProcesos" class="VentanaFlotante"
+				style="display: none;"></div>
+			<div id="divVtnVerValidacioneMet" class="VentanaFlotanteResize">
+			</div>
+			<div id="divVtnDetalleCargaMasiva" class="VentanaFlotanteResize">
+			</div>
+			<div id="divVerIncidenciasMet" class="VentanaFlotanteResize"
+				style="overflow: hidden"></div>
+			<div id="divVtnVerCedulaValidacioneMet" class="VentanaFlotanteResize">
+			</div>
+			<div id="divVtnINPC" class="VentanaFlotante"></div>
+			<div id="divVtnBHSIC" class="VentanaFlotanteResize"></div>
+			<div id="divReportesPMC" class="VentanaFlotanteResize"
+				style="display: none;">
+				<div id="divBloqVtnReportesPMC"
+					style="width: 98%; height: 98%; background: Gray; filter: alpha(opacity = 80); opacity: 0.9; position: absolute; text-align: center; display: none; z-index: 1;">
+				</div>
+				<div id="dvReportesPMC"
+					style="width: 100%; height: 100%; overflow: hidden; text-align: center; font-size: 12px">
+					<div id="tab-container">
+						<ul id="ultabs" class="tab-menu">
+							<li id="PMC1Cartera" class="active">CARTERA</li>
+							<li id="PMC2Estatus">ESTATUS</li>
+							<li id="PMC3MonedaFactorSistema">MONEDA FACTOR SISTEMA</li>
+							<li id="PMC4SubProducto">SUBPRODUCTO</li>
+							<li id="PMC5Fitir" style="">FITIR</li>
+							<li id="PMC6Facturacion" style="">FACTURACIÓN</li>
+							<li id="PMC7Metodologia">METODOLOGÍA</li>
+							<li id="PMC8Calificacion" style="">CALIFICACIÓN</li>
+							<li id="PMC9Negocio" style="">NEGOCIO</li>
+							<li id="PMC10GeoComercial" style="">GEO COMERCIAL</li>
+							<li id="PMC11GeoPolitica" style="">GEO POLITICA</li>
+						</ul>
+						<div class="clear"></div>
+						<div class="tab-top-border"></div>
+						<div id="PMC1Cartera-tab" class="tab-content active"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<span id="spTitleApartado1_1"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">PMC
+									1 CARTERA(CORTE ACTUAL)</span> <br />
+								<div id="divEncApartado1_1"
+									style="overflow: hidden; white-space: nowrap; margin-left: -1px;">
+								</div>
+								<div id="divApartado1_1"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this);"></div>
+								<br /> <span id="spTitleApartado2_1"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">PMC
+									1 CARTERA(CORTE ANTERIOR)</span> <br />
+								<div id="divEncApartado2_1"
+									style="overflow: hidden; white-space: nowrap; margin-left: -1px;">
+								</div>
+								<div id="divApartado2_1"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+								<br /> <span id="spTitleApartado3_1"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">PMC
+									1 CARTERA(COMPARATIVO)</span> <br />
+								<div id="divEncApartado3_1"
+									style="overflow: hidden; white-space: nowrap; margin-left: -1px;">
+								</div>
+								<div id="divApartado3_1"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+							</center>
+						</div>
+						<div id="PMC2Estatus-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<span id="spTitleApartado1_2"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CORTE
+									ACTUAL</span> <br />
+								<div id="divEncApartado1_2"
+									style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+								</div>
+								<div id="divApartado1_2"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this);"></div>
+								<br /> <span id="spTitleApartado2_2"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CORTE
+									ANTERIOR</span> <br />
+								<div id="divEncApartado2_2"
+									style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+								</div>
+								<div id="divApartado2_2"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+								<br /> <span id="spTitleApartado3_2"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">COMPARATIVO</span>
+								<br />
+								<div id="divEncApartado3_2"
+									style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+								</div>
+								<div id="divApartado3_2"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+							</center>
+						</div>
+						<div id="PMC3MonedaFactorSistema-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<span id="spTitleApartado1_3"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CORTE
+									ACTUAL</span> <br />
+								<div id="divEncApartado1_3"
+									style="overflow: hidden; white-space: nowrap; margin-left: -13px;">
+								</div>
+								<div id="divApartado1_3"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this);"></div>
+								<br /> <span id="spTitleApartado2_3"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CORTE
+									ANTERIOR</span> <br />
+								<div id="divEncApartado2_3"
+									style="overflow: hidden; white-space: nowrap; margin-left: -13px;">
+								</div>
+								<div id="divApartado2_3"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+								<br /> <span id="spTitleApartado3_3"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">COMPARATIVO</span>
+								<br />
+								<div id="divEncApartado3_3"
+									style="overflow: hidden; white-space: nowrap; margin-left: -13px;">
+								</div>
+								<div id="divApartado3_3"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+							</center>
+						</div>
+						<div id="PMC4SubProducto-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<div class="dvContenedor">
+									<span id="spTitleApartado1_4"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ACTUAL)</span> <br />
+									<div id="divEncApartado1_4"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado1_4" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado2_4"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ANTERIOR)</span> <br />
+									<div id="divEncApartado2_4"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado2_4" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado3_4"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (COMPARATIVO)</span> <br />
+									<div id="divEncApartado3_4"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado3_4" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+								</div>
+							</center>
+						</div>
+						<div id="PMC5Fitir-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<div class="dvContenedor">
+									<span id="spTitleApartado1_5"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ACTUAL)</span> <br />
+									<div id="divEncApartado1_5"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado1_5" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado2_5"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ANTERIOR)</span> <br />
+									<div id="divEncApartado2_5"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado2_5" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado3_5"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (COMPARATIVO)</span> <br />
+									<div id="divEncApartado3_5"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado3_5" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+								</div>
+							</center>
+						</div>
+						<div id="PMC6Facturacion-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<div class="dvContenedor">
+									<span id="spTitleApartado1_6"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ACTUAL)</span> <br />
+									<div id="divEncApartado1_6"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado1_6" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado2_6"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ANTERIOR)</span> <br />
+									<div id="divEncApartado2_6"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado2_6" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado3_6"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (COMPARATIVO)</span> <br />
+									<div id="divEncApartado3_6"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado3_6" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+								</div>
+							</center>
+						</div>
+						<div id="PMC7Metodologia-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<span id="spTitleApartado1_7"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+									POR METODOLOGÍA(CORTE ACTUAL)</span> <br />
+								<div id="divEncApartado1_7"
+									style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+								</div>
+								<div id="divApartado1_7"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+								<br /> <span id="spTitleApartado2_7"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+									POR METODOLOGÍA(CORTE ANTERIOR)</span> <br />
+								<div id="divEncApartado2_7"
+									style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+								</div>
+								<div id="divApartado2_7"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+								<br /> <span id="spTitleApartado3_7"
+									style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+									POR METODOLOGÍA(COMPARATIVO)</span> <br />
+								<div id="divEncApartado3_7"
+									style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+								</div>
+								<div id="divApartado3_7"
+									style="width: 100%; height: 150px; overflow: auto;"
+									onscroll="scrollear(this)"></div>
+							</center>
+						</div>
+						<div id="PMC8Calificacion-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<div class="dvContenedor">
+									<span id="spTitleApartado1_8"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ACTUAL)</span> <br />
+									<div id="divEncApartado1_8"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado1_8" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado2_8"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ANTERIOR)</span> <br />
+									<div id="divEncApartado2_8"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado2_8" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado3_8"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (COMPARATIVO)</span> <br />
+									<div id="divEncApartado3_8"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado3_8" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+								</div>
+							</center>
+						</div>
+						<div id="PMC9Negocio-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<div class="dvContenedor">
+									<span id="spTitleApartado1_9"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ACTUAL)</span> <br />
+									<div id="divEncApartado1_9"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado1_9" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado2_9"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ANTERIOR)</span> <br />
+									<div id="divEncApartado2_9"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado2_9" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado3_9"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (COMPARATIVO)</span> <br />
+									<div id="divEncApartado3_9"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado3_9" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+								</div>
+							</center>
+						</div>
+						<div id="PMC10GeoComercial-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<div class="dvContenedor">
+									<span id="spTitleApartado1_10"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ACTUAL)</span> <br />
+									<div id="divEncApartado1_10"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado1_10" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado2_10"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ANTERIOR)</span> <br />
+									<div id="divEncApartado2_10"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado2_10" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado3_10"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (COMPARATIVO)</span> <br />
+									<div id="divEncApartado3_10"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado3_10" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+								</div>
+							</center>
+						</div>
+						<div id="PMC11GeoPolitica-tab" class="tab-content"
+							style="overflow: auto; height: 94%;">
+							<center style="margin-top: 1%; height: 95%;">
+								<div class="dvContenedor">
+									<span id="spTitleApartado1_11"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ACTUAL)</span> <br />
+									<div id="divEncApartado1_11"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado1_11" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado2_11"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (CORTE ANTERIOR)</span> <br />
+									<div id="divEncApartado2_11"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado2_11" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+									<br /> <span id="spTitleApartado3_11"
+										style="font: normal 12px Helvetica, Arial, sans-serif; font-weight: bold; text-shadow: 2px 1px 1px rgb(128, 128, 128);">CARTERA
+										TOTAL (COMPARATIVO)</span> <br />
+									<div id="divEncApartado3_11"
+										style="overflow: hidden; white-space: nowrap; margin-left: 0px;">
+									</div>
+									<div id="divApartado3_11" style="width: 100%; overflow: auto;"
+										onscroll="scrollear(this)"></div>
+								</div>
+							</center>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="divBloqueador" lang="aa" class="divBloqueadorLoading"
+				style="text-align: center; background: Gray; display: none;">
+				<img alt="a" src="../Images/PanelDeControl/loading2.gif"
+					style="height: 30px; display: block; width: 30px; margin-top: 20%; margin-left: 45%;" />
+				<div id="msjLoading"
+					style="text-align: center; color: rgb(219, 219, 219)"></div>
+			</div>
+			<div id="divCargaAcuse" class="VentanaFlotanteResize"></div>
+			<div id="divVerFichaTecnica" class="VentanaFlotanteResize"></div>
+			<div id="divCargaReportes" class="VentanaFlotanteResize"></div>
+			<div id="dvComentarios" style="width: 700px; text-align: center"
+				class="VentanaFlotanteResize"></div>
+			<div id="divPrepararCargaInfoDetalle" class="VentanaFlotanteResize">
+			</div>
+			<div>
+			<table id="tblLeyenda"
+					style="width: 100%; display: initial; position: absolute; bottom: 0; left: 0; background: White">
+					<tr style="height: 10px; font-weight: bold">
+						<td class="EstatusGris" style="width: 1%">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 5%" class="txtLegent">NO INICIADO</td>
+						<td class="EstatusAmarillo" style="width: 1%;">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 5%" class="txtLegent">EN PROCESO</td>
+						<td class="EstatusRojo" style="width: 1%;">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 6%; height: 10px" class="txtLegent">ERROR</td>
+						<td class="EstatusNaranja" style="width: 1%;">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 5%;" class="txtLegent">WARNING</td>
+						<td class="EstatusVerde" style="width: 1%;">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 5%;" class="txtLegent">REALIZADO</td>
+						<td class="EstatusAzul" style="width: 1%;">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 5%;" class="txtLegent">REALIZADO SIN
+							CALIFICAR NI VALIDAR</td>
+						<td class="EstatusMorado" style="width: 1%;">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 6%; height: 10px" class="txtLegent">
+							REQUIERE ACTUALIZACIÓN</td>
+						<td class="EstatusBlanco" style="width: 1%;">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 6%; height: 10px" class="txtLegent">NO
+							APLICA</td>
+						<td class="EstatusNegro" style="width: 1%;">
+							<p>&nbsp;</p>
+						</td>
+						<td style="width: 6%; height: 10px" class="txtLegent">
+							DETENIDO POR EL USUARIO</td>
+					</tr>
+				</table>
+				</div>
+<!-- 				<div id="idDivDialogFuente" style="display: ;"> -->
+ 					<p:dialog id="idCdulaCarga" widgetVar="dlgCedulaCarga" 
+ 					modal="true"  width="700" 
+ 					height="600" rendered="true" closable="false" dynamic="true"
+ 					style="    position: fixed; width: 788.4px;height: 573.4px;left: 257px;
+    				top: 7.5px;visibility: visible;z-index: 1010;display: none;" showHeader="false" > 
+<!--  					rendered="#{panelControl.showCedula}"> -->
+<!--  					style="min-with:100px; min-height:600px; max-with:100px; max-height:600px"closable="false"> -->
+ 					<ui:include src="DialogCedulaCarga.xhtml" /> 
+ 						</p:dialog>
+<!--  					</div> -->
+ 					<div id="idDivDialogProceso" style="display: none;">
+ 					<p:dialog id="idCdulaProceso" widgetVar="dlgCedulaProceso"
+ 						modal="true" position="center center" width="500" height="300" rendered="true"> 
+<!--  						rendered="#{panelControl.showCedulaProceso}"> -->
+<!--  						style="min-with:100px;min-height:600px; max-with:100px; max-height:600px"closable="false"> -->
+ 						<ui:include src="DialogCedulaProceso.xhtml" /> 
+ 					</p:dialog>
+ 					</div>
+ 					
+ 					<p:dialog id="idAgendaCarga" widgetVar="dlgAgendaDeCarga"
+ 				     modal="true" rendered="true" dynamic="true" 
+ 					 style="position: fixed; width: 750px;height: 400px;left: 257px;
+     				 top: 7.5px;visibility: visible;z-index: 400;display: none;    
+     				 max-width: 550px;min-width: 550px;" showHeader="true" header="AGENDA DE DESCARGA">
+ 						<ui:include src="DialogAgendaDeDescarga.xhtml" /> 
+ 					</p:dialog>
+ 					<p:dialog id="idDetalleReprocesos" widgetVar="dlgDetalleReprocesos"
+ 				     modal="true" rendered="true" dynamic="true" 
+ 					 style="position: fixed; width: 750px;height: 400px;left: 257px;
+     				 top: 7.5px;visibility: visible;z-index: 400;display: none;    
+     				 max-width: 550px;min-width: 550px;" showHeader="true" header="REPROCESOS MEDIOS DE PAGO">
+ 						<ui:include src="DialogDetalleReprocesos.xhtml" /> 
+ 					</p:dialog>
+				
+		</ui:define>
+
+		<ui:define name="footer">
+	
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

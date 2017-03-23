@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+<head >
+ <script type="text/javascript">
+
+ function fridaysDisabled(fecha)
+ {
+   var day = fecha.getDay();
+   return [day != 5, '']
+ }
+</script>
+
+
+
+</head>
+
+	
+   
+<h:body>
+	<link href="Styles/StylesLogin.css" rel="stylesheet" type="text/css" />
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+		
+<!-- 		<p:calendar id="cal"  value="#{home.fecha}" selectOtherMonths="true" showOtherMonths="true" showWeek="true" disabledWeekends="true" maxdate="new Date();" navigator="true" locale="fr"  > -->
+<!-- 		</p:calendar> -->
+		
+	
+<!--     <p:commandButton actionListener="#{home.decrementMonth}" -->
+<!--     id="navLeft" update=":form1,cal" icon="ui-icon-triangle-1-w" /> -->
+    
+<!--     <p:outputLabel value="#{home.fecha}"></p:outputLabel> -->
+    
+<!--     <p:commandButton actionListener="#{home.incrementMonth}" -->
+<!--     id="navLef"  update=":form1,cal" icon="ui-icon-triangle-1-w" /> -->
+ 
+ 
+
+    
+			<div id="saludo"
+				style="vertical-align: middle; top: 40%; display: block; position: absolute; width: 100%;">
+				<p:graphicImage url="/Images/Login/wellcomeText.png"
+					styleClass="img" />
+
+
+				<div
+					style="background: rgb(150, 149, 149); font-size: 20px; color: rgb(255, 255, 255); padding: 20px; text-align: center; width: 60%; margin-left: -10px;">
+					<p:outputLabel value="#{login.fullname}"
+						style="width: 55%; height: 58px; font-size: 16px; "
+						Font-Names="Arial" />
+				</div>
+			</div>
+
+
+
+
+
+
+
+			<div class="spacerA"></div>
+
+
+
+
+
+
+		</ui:define>
+
+
+
+
+
+	</ui:composition>
+	<h2>This is page1 content</h2>
+
+</h:body>
+
+</html>

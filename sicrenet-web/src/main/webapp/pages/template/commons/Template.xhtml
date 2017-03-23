@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head id="Head1">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+	<meta name="keywords" content="HTML,CSS,XML,JavaScript" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link href="../Images/ImgsMasterPage/SicreNet.ico"
+		rel='shortcut icon' type='image/x-icon' />
+	<title>Panel Global</title>
+	<meta http-equiv="cache-control" content="no-cache" />
+	<script src="../js/Scripts/jquery-1.7.1.js" 
+	type="text/javascript"></script>
+	<script src="../js/Scripts/jquery-ui-1.8.20.js"
+		type="text/javascript"></script>
+	<link href="../Styles/themes/base/jquery-ui.css" rel="stylesheet"
+		type="text/css" />
+	<link href="../Styles/themes/base/jquery.ui.core.css"
+		rel="stylesheet" type="text/css" />
+	<link href="../Styles/themes/base/jquery.ui.datepicker.css"
+		rel="stylesheet" type="text/css" />
+	<link href="../Styles/StyleSiteMaster.css" rel="stylesheet"
+		type="text/css" />
+<!-- 	<link href="../Styles/PanelDeControl/StyleDatePicker.css" -->
+<!-- 		rel="stylesheet" type="text/css" /> -->
+	<link href="../Styles/PanelDeControl/StylePanelControl.css"
+		rel="stylesheet" type="text/css" />
+	<link href="../Styles/StyleCalendar.css" rel="stylesheet" 
+			type="text/css" />
+	<link href="../Styles/PanelDeControl/StyleCustomPanelControl.css" 
+		  rel="stylesheet" type="text/css" />
+	<script src="../js/Scripts/Utilidades/funcionesGralesSicreNet.js"
+		type="text/javascript"></script>
+	<script src="../js/Scripts/Utilidades/SoporteAjax.js"
+		type="text/javascript"></script>
+	<script src="../js/Scripts/PanelDeControl/MenuBarPaises.js"
+		type="text/javascript">
+	</script>
+	<script src="../js/Scripts/CustomPanelUtil.js"
+		type="text/javascript">
+	</script>
+	<script
+		src="../js/Scripts/PanelDeControl/jquery-ui-timepicker-addon.js"
+		type="text/javascript"></script>
+	<script src="../js/Scripts/PanelDeControl/ProcesoPanel.js" type="text/javascript"></script>
+	<script src="../js/Home/Date.js" type="text/javascript"></script>
+	<style>
+	.menubar {
+		font-size: 8px;
+		font-weight: bold;
+		color: white;
+		background-color: #007561 !important;
+		max-height: 23px;
+	}
+
+	.ui-menu .ui-menuitem-text {
+	float: left;
+	color: white;
+	}
+
+	.ui-menu .ui-menu-parent .ui-icon-triangle-1-e, .ui-menu .ui-menu-parent 
+	.ui-icon-triangle-1-s,
+	.ui-menubar .ui-menu-child .ui-icon-triangle-1-s, .ui-menubar 
+	.ui-menu-child .ui-icon-triangle-1-s
+	{
+	float: right;
+	color: white;
+}
+
+.ui-menu, .ui-menu .ui-menu-child {
+	background: #c4c4c4
+		url(/sicrenet-web/javax.faces.resource/images/
+		ui-bg_highlight-hard_80_c4c4c4_1x100.png.xhtml?ln=primefaces-aristo)
+		top repeat-x;
+	background: #c4c4c4 linear-gradient(top, rgba(255, 255, 255, 0.8),
+		rgba(255, 255, 255, 0));
+	background: #007556
+		-webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255,
+		0.8)), to(rgba(255, 255, 255, 0)));
+	background: #c4c4c4 -moz-linear-gradient(top, rgba(255, 255, 255, 0.8),
+		rgba(255, 255, 255, 0));
+}
+
+</style>
+<!-- 	<f:facet name="last"> -->
+<!-- 		<h:outputStylesheet library="default" name="../Styles/MenuBar.css" /> -->
+<!-- 	</f:facet> -->
+	<link href="../Styles/Grales.css" rel="stylesheet" type="text/css" />
+<!-- 	<link href="../Styles/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
+<!-- 	<link href="../Styles/PanelDeControl/StyleDatePicker.css" rel="stylesheet" type="text/css" /> -->
+<script>
+
+//<![CDATA[
+        PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D','L','M','M','J','V','S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+        };
+
+
+        function Waiting(mostrar, msj) {
+            if (mostrar && $("#divBloqueador").attr("lang") == "aa") {
+                $("#divBloqueador").parent().children(0).hide();
+                $("#divBloqueador").dialog("open");
+                var styleLoading = $(".ui-widget-overlay").attr("style") + "background: #000;";
+                $(".ui-widget-overlay").attr("style", styleLoading);
+                $("#msjLoading").html("");
+                $("#msjLoading").html(msj);
+                $("#divBloqueador").attr("lang", "ab");
+                $("#divBloqueador").show();
+                // if($(".ui-widget-overlay").attr("style")!=undefined && $(".ui-widget-overlay").attr("style").indexOf("none")!=-1)  $(".ui-widget-overlay").show() 
+            }
+            else if (!mostrar && $("#divBloqueador").attr("lang") == "ab") {
+                $("#divBloqueador").attr("lang", "aa");
+                $("#divBloqueador").dialog("close");
+                //if( $(".ui-widget-overlay").attr("style")!=undefined && $(".ui-widget-overlay").attr("style").indexOf("block")!=-1)$(".ui-widget-overlay").hide();
+                // clearTimeout(timeMostrarLoading);  
+            }
+        };
+        
+//         $(window).onload(function()
+//         	    {
+//         	        $("#idDivPanel").css("max-width", (parseInt($(document).width()) / 2) - 10  + "px");
+//         	        alert("entery");
+// //         	        $("#idDivDisposicion4").css("width", (parseInt($(document).width()) / 2) - 30 + "px");
+//         	    });
+	    
+//         $( document ).ready(function() {
+window.onload = function () {
+	Waiting(true, "Cargando Información...");
+
+// 	 $("#idDivPanel").css("max-width", (parseInt($(document).width())) -20  + "px");
+	 $("#divPanelMain").css("max-width", (parseInt($(window).width())) - 20  + "px");
+	 $("#idDivPanel").css("max-height", (parseInt($(window).height())) - 180  + "px");
+	 $("#divPanelMain").css("max-height", (parseInt($(window).height())) - 180  + "px");
+// 	 $("#form1:idPanelGridCartera1").css("max-width", (parseInt($(document).width())) -20  + "px");
+// 	 $("#form1:idPanelGridCartera2").css("max-width", (parseInt($(document).width())) -20  + "px");
+// 	 $("#form1:idPanelGridCartera3").css("max-width", (parseInt($(document).width())) -20  + "px");
+//     alert("entery");
+	  
+	  Waiting(false, "Cargando Información...");
+   };
+//    $(document).ready(function () {
+// 	   $(".ui-toogle1").on("click", function () {
+// 		   $(".ui-panelgrid td").css("min-width", (25 + "%");
+// 	   		});
+  		
+// 	   $(".ui-toogle2").on("click", function () {
+// 		   $(".ui-divFase2").css("min-width", (25 + "%");
+// 	   		});
+  		
+// 	   $(".ui-toogle3").on("click", function () {
+// 		   $(".ui-divFase3").css("min-width", (25 + "%");
+// 	   		});
+  		
+// 	   });
+   $(window).resize(function()
+		    {
+		 $("#divPanelMain").css("max-width", (parseInt($(document).width())) -20  + "px");
+		 $("#divPanelMain").css("max-height", (parseInt($(document).height())) - 360  + "px");
+		    }); 
+   
+	function renderedTR(){
+// 		var table = $("#idPanelGridHeader");
+// 		var table1 = $("#idPanelGridBody");
+// 		var firstColumnWidth = table1.find("th:first").innerWidth();
+// 		table.find("th:first").width(firstColumnWidth+"px");
+// 		$("#idDivPanel").css("max-width", (parseInt($(document).width()) / 2) - 10  + "px");
+		alert("width value before");
+ 		var theWidth = //"1111"; 
+ 	 		$("#idPanelGridBody tbody tr:first td:first");//css("width");
+// 			$("table.idPanelGridBody > tbody > tr > td:first-child").css("width");
+
+// 			$("#idPanelGridBody").eq(1).find("tr > td:second").width();
+		alert($(".AcordeonAzul_1").width());
+		alert("width value:::" + theWidth.width());
+		
+// 		alert(table.find("th:first").width());
+			}
+
+      //]]>
+</script>
+</h:head>
+<h:body style="width: 99.9%; overflow: auto; margin: 1px;">
+	<h:form id="form1">
+<!-- 		<div id="divBloqueador" lang="aa" class="divBloqueadorLoading" -->
+<!-- 			style="text-align: center; background: Gray; display: none;"> -->
+<!-- 			<img alt="a" src="../Images/PanelDeControl/loading2.gif" -->
+<!-- 				style="height: 30px; display: block; width: 30px; margin-top: 20%; margin-left: 45%;" /> -->
+<!-- 			<div id="msjLoading" -->
+<!-- 				style="text-align: center; color: rgb(219, 219, 219)"></div> -->
+<!-- 		</div> -->
+		<div class="root">
+			<div id="divHeader" class="headerMain">
+				<p:commandLink D="ImageButton1" styleClass="logo" action="#{home.home}">
+					<h:graphicImage value="../Images/ImgsMasterPage/logo.png"
+						style="max-height: 91px; max-width: 70px; 
+						min-height: 91px; min-width: 70px;" />
+				</p:commandLink>
+				<span id="spanLogo" lang="aa"></span>
+					<div class="userLinks">
+					<img alt="" id="imgCloseApp" class="imgCrecer"
+						src="../Images/ImgsMasterPage/close.png"
+						onclick="PF('dlg2').show();" /> 
+
+							<p:commandLink value="Cerrar Sesión" type="button" 
+							onclick="PF('dlg2').show();" styleClass="Salir"/> 
+						 
+						 <p:dialog header="Mensaje SicreNet" widgetVar="dlg2" 
+						 modal="true" height="100" position="center">
+    						<table>
+    						<tr>
+    						<td colspan="2">
+    						<h:outputText value="¿Desea cerrar la página web?" />
+    						</td>
+    						</tr>
+    						<tr>
+    						<td>
+    						<h:commandButton action="#{login.logout}" 
+    						value="Si" styleClass="classButton" />
+    						</td>
+    						<td>
+    						<h:commandButton onclick="PF('dlg2').hide();"  
+    						value="No" styleClass="classButton" />
+    						</td>
+    						</tr>
+    						</table>
+						 </p:dialog>  
+				</div>	
+				<div id="divMenuModulos" class="systemsMenu" style="top: -2px;"></div>
+				<div id="divFechaHora" class="systemDate"
+					style="margin: 7px 0 -5px 0px;">
+					<div id="divFecha" class="day">02 DICIEMBRE 2016</div>
+					<div id="divHora" class="day">11:11:11</div>
+					
+				</div>
+				
+				
+					
+				
+				<p:graphicImage
+					value="../Images/ImgsMasterPage/logoBAZ_blanco.png"
+					stream="false" styleClass="logoBAZ convert"
+					style="margin:-1px 7px 0px 0px;" />
+					
+				
+					
+				<div class="userData" id="divRuta" style="border-color: blue">
+				
+					<table bgcolor="">
+						<tr bgcolor="" style="height: 25px; min-height: 25px;">
+							<td>
+							<span style="margin-top: 11px; 
+							position: absolute;">Usuario:</span>
+								<br /> <br />
+							</td>
+							<td></td>
+							<td><span style="margin-top: 11px; 
+							position: absolute;">Perfil:</span>
+								<br /> <br /></td>
+							<td></td>
+							<td id="tdRuta"><span
+								style="margin-top: 11px; 
+								position: absolute;">Ruta:</span> <br />
+								<br /></td>
+							<td><span id="spanStatusSession"></span></td>
+						</tr>
+						<tr style="height: 20px; min-height: 20px;">
+							<td><h:outputText id="LabelDatos" 
+							value="#{login.fullname}"
+							styleClass="userDataInfo" 
+									style="margin-top: 16px;" /></td>
+							<td></td>
+							<td><h:outputText id="lblPerfil" 
+							value="#{login.perfil}"
+									styleClass="userDataInfo" 
+									style="margin-top: 16px;" /></td>
+							<td> </td>
+							<td><h:outputText id="lblRuta"
+									value="#{login.ruta}"
+									styleClass="userDataInfo" 
+									style="margin-top: 16px;" /></td>
+							<td></td>
+							
+						</tr>
+						
+
+						<tr bgcolor="" style="height: 33px; min-height: 33px;">
+							<td colspan="6">
+							
+							<p:menubar  styleClass="menubar"	
+								model="#{menu.menumodel}" /> 
+							</td>
+							
+						</tr>
+					</table>
+					
+				</div>
+			
+				<div id="menu" style="width: 100%; display: block;">
+				
+				
+				
+				
+				</div>
+			
+			<p:graphicImage id="imgBandera" value="#{home.pais}" 
+					style="display: inline;" styleClass="logoBandera convert"
+					 alt="LogoBan"/> <img id="imgFavoritos" lang="aa"
+					src="../Images/Favoritos/estrella.png" alt="Favoritos"
+					style="display: block; margin: -23px 73px -5px 0px; 
+					float: right; cursor: pointer;"
+					title="Clic para Ver Favoritos" class="imgCrecer"
+					onclick="verFavoritos(this);" />
+					
+				
+                   
+					
+					
+					
+					
+			</div>
+			
+			<div id="shadows" class="shadows">
+			
+			      <div class="dropShadowBox">
+                    <table class="contents" border="0" cellspacing="0">
+                    
+                        <tr>
+                            <td class="main">
+                                <input type="hidden" id="HPaisBD" value="" />
+                                <input type="hidden" id="Hidden1" value=""/>
+                                <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+                                <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+                                <table id="tblFavoritosMP" style="/*margin-left: 71%; */ 
+                                z-index: 100; position: absolute; display: none;">
+                                
+                                    <tr>
+                                        <td id="tdContentFavoritos">
+                                            <div id="divFavoritosMP" 
+                                            style="width: 300px; height: 150px; 
+                                            float: right; background: rgba(255, 255, 255, 0.91);
+                                             border-radius: 5px; border: rgb(17, 120, 92) solid 2px; 
+                                             -webkit-box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(17, 120, 92); -mox-box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(17, 27, 18); box-shadow: 1.5px 1.5px 1.5px 1.5px rgb(17, 120, 92);">
+                                                 </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <ui:insert 
+                                name="MainContent"> 
+                                </ui:insert>
+                            </td>
+                            
+                        </tr>
+                        
+                    </table>
+                </div>
+                  <div id="footer">
+                 
+                                       
+	    	<ui:insert name="footer" >
+	    	
+                      <p:graphicImage url="/Images/Login/lineasB2.png"
+					styleClass="img" />
+				<div id="divPieNavegadoresSoportados"
+					style="width: 100%; position: absolute; bottom: 0; left: 0; 
+					background: rgba(250, 244, 244, 0.06); text-align: center; 
+					font-size: 10px; font-weight: bold; color: White; 
+					text-shadow: 2px 1px 1px rgb(29, 7, 7);">
+					SicreNet funciona correctamente en Google Chrome, Mozilla Firefox e
+					Internet Explorer V.10+</div>
+					</ui:insert>
+    	    </div>
+        </div>
+ 			</div>
+		
+	</h:form>
+</h:body>
+</html>

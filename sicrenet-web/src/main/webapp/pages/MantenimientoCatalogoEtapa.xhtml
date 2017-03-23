@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:body>
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+			<!-- 			<h:form id="formMsj" prependId="false"> -->
+			<!-- 				<br /> -->
+			<!-- 				<br /> -->
+			<!-- 				<p:messages id="mensajes" showDetail="true" autoUpdate="true" /> -->
+			<!-- 			</h:form> -->
+
+			<br></br>
+			<br></br>
+			<br></br>
+
+
+			<p:growl id="growl" showDetail="true" sticky="true" life="2000" />
+
+			<div align="center">
+				<div align="center">
+					<p:commandButton id="toltipNuevoEtapa" value="Nueva Etapa"
+						onclick="PF('dlg7').show();" position="center" align="center"
+						Class="classButtonUsuarios" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="100" maximizable="150"
+						icon="ui-icon-new"
+						actionListener="#{mantenimientoCatalogoEtapa.limpiar}"
+						update=":form1:nomAgrega,descAgrega,nombreValidate,descripcionValidate">
+					</p:commandButton>
+
+					<p:tooltip id="toolTipGrow" for="toltipNuevoEtapa"
+						value="Agregar Nueva Etapa" showEffect="clip" position="top" />
+				</div>
+				<div>
+					<p:dataTable id="RefrehsTable" var="etapa"
+						value="#{mantenimientoCatalogoEtapa.listCatEtapa}" rows="10"
+						style="border-radius: 80px; padding: 10px; max-width: 800px; color: #FFFFFF;"
+						minHeight="200" maximizable="300" paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="1,5,10,15" styleClass="table table-hover"
+						selection="#{mantenimientoCatalogoEtapa.seleccionadoEtapa}"
+						rowKey="#{etapa.id_etapa}" update=":form1"
+						rowStyleClass="#{etapa.desEstatus == 'ALTA'  ? 'old' : etapa.desEstatus == 'BAJA' ? 'YELLOW' : ''}">
+					>
+					<p></p>
+						<f:facet name="header"
+							style="text-align:center; background-color:#C6C3C6;padding:12px;">
+           				Etapas
+      			 	</f:facet>
+						<p></p>
+						<p:column headerText="NOMBRE">
+
+							<h:outputText value="#{etapa.nombre}" styleClass="columnTable" />
+
+						</p:column>
+
+						<p:column headerText="NOMBRE DE LA ETAPA">
+
+							<h:outputText value="#{etapa.descripcion}"
+								styleClass="columnTable" />
+
+						</p:column>
+
+						<p:column headerText="ESTATUS">
+
+							<h:outputText value="#{etapa.desEstatus}"
+								styleClass="columnTable" />
+
+						</p:column>
+
+						<p:column headerText="EDITAR" style="width: 45px;">
+							<center>
+								<p:commandButton id="toltipBuscarEtapa" value="Editar"
+									icon="ui-icon-pencil" update=":form1:panelGridActualizaEtapa"
+									onclick="PF('dlg6').show();"
+									action="#{mantenimientoCatalogoEtapa.CargaCatEtapaActualizar}">
+									<f:setPropertyActionListener value="#{etapa}"
+										target="#{mantenimientoCatalogoEtapa.seleccionadoEtapa}" />
+								</p:commandButton>
+								<p:tooltip for="toltipBuscarEtapa" value="Actualizar Etapa"
+									showEffect="clip" position="top" />
+							</center>
+
+
+						</p:column>
+
+					</p:dataTable>
+
+				</div>
+
+				<div>
+					<p:dialog id="RefrehsDialogNuevo" header="Nuevo Etapa"
+						widgetVar="dlg7" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="200" maximizable="250"
+						position="center" update="RefrehsTable" modal="true"
+						closable="false">
+
+						<div>
+							<h:panelGrid columns="2" id="panelGridAgregarNuevo">
+
+								<p:outputLabel for="nomAgrega" value="Nombre:"
+									styleClass="label" />
+								<p:inputText id="nomAgrega"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoEtapa.nombreEtapaAgregar}"
+									placeholder="Nombre..." />
+
+
+
+								<p:outputLabel for="descAgrega" value="Descripción:"
+									styleClass="label" />
+								<p:inputText id="descAgrega"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoEtapa.descripcionAgregar}"
+									placeholder="Descripción..." />
+
+							</h:panelGrid>
+						</div>
+						<div align="center">
+							<br></br>
+
+							<p:commandButton value="Aceptar"
+								styleClass="ui-confirmdialog-yes"
+								actionListener="#{mantenimientoCatalogoEtapa.agregarCatEtapa}"
+								update=":form1:RefrehsTable,growl" icon="ui-icon-check">
+							</p:commandButton>
+
+
+
+
+							<p:commandButton value="Cancelar"
+								styleClass="ui-confirmdialog-no" onclick="dlg7.hide()"
+								icon="ui-icon-close"
+								action="#{mantenimientoCatalogoEtapa.limpiar}"
+								update=":form1:RefrehsTable,descAgrega,nomAgrega" />
+						</div>
+
+					</p:dialog>
+				</div>
+
+
+
+
+				<div>
+					<p:dialog id="RefrehsDialogActualiza" header="Actualizar Etapa"
+						widgetVar="dlg6" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="200" maximizable="250"
+						position="center" update="RefrehsTable" modal="true"
+						closable="false">
+						<div>
+							<h:panelGrid columns="2" id="panelGridActualizaEtapa">
+
+								<p:outputLabel for="nombreValidate" value="Nombre:"
+									styleClass="label" />
+								<p:inputText id="nombreValidate"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoEtapa.nombreEtapa}"
+									placeholder="Nombre..." />
+
+
+
+								<p:outputLabel for="descripcionValidate" value="Descripción:"
+									styleClass="label" />
+								<p:inputText id="descripcionValidate"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoEtapa.descripcion}"
+									placeholder="Descripción...">
+
+								</p:inputText>
+
+								<p:outputLabel value="Estatus:" styleClass="label" />
+								<p:selectOneMenu value="#{mantenimientoCatalogoEtapa.estatus}"
+									style=" width: 208px; height: 18px;  font-size: 12px;">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItem itemLabel="Alta" itemValue="1" />
+									<f:selectItem itemLabel="Baja" itemValue="0" />
+
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</div>
+
+						<div align="center">
+							<br></br>
+
+							<p:commandButton value="Aceptar" icon="ui-icon-check"
+								actionListener="#{mantenimientoCatalogoEtapa.actualizarCatEtapa}"
+								styleClass="ui-confirmdialog-yes"
+								update=":form1:RefrehsTable,nombreValidate,descripcionValidate,growl">
+							</p:commandButton>
+
+
+							<p:commandButton value="Cancelar" icon="ui-icon-close"
+								styleClass="ui-confirmdialog-no"
+								actionListener="#{mantenimientoCatalogoEtapa.limpiar}"
+								onclick="dlg6.hide()" />
+
+
+						</div>
+
+
+
+
+
+					</p:dialog>
+				</div>
+			</div>
+		</ui:define>
+
+		<ui:define name="footer">
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+
+</h:body>
+
+</html>

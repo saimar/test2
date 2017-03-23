@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:acegijsf="http://sourceforge.net/projects/jsf-comp/acegijsf">
+
+<h:head>
+	<title>Panel Global</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="Panel Global" />
+	<meta name="keywords"
+		content="jquery, css3, sliding, box, menu, cube, navigation, portfolio, thumbnails" />
+	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="css/style.css" type="text/css"
+		media="screen" />
+	<style>
+body {
+	background: #333 url(img/bg.jpg) repeat top left;
+	font-family: Arial;
+}
+
+span.reference {
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+	font-size: 12px;
+	12
+}
+
+span.reference a {
+	color: #aaa;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #000;
+	margin-right: 30px;
+}
+
+span.reference a:hover {
+	color: #ddd;
+}
+
+ul.sdt_menu {
+	margin-top: 150px;
+}
+
+h1.title {
+	text-indent: -9000px;
+	background: transparent url(img/logoBAZ.png) no-repeat top rigth;
+	width: 1200px;
+	height: 69px;
+}
+</style>
+
+</h:head>
+<h:body>
+
+
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+			<center>
+				<p:commandButton value="Nuevo Perfil" type="button"
+					onclick="PF('nuevoPerfil').show();" />
+
+				<p:dataTable id="Perfiles" var="Rol"
+					value="#{mantenimientoPerfilesMB.listaRoles}" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					style="max-width: 750px; padding: 10px; border-radius: 100px;"
+					selection="#{mantenimientoPerfilesMB.catRol}" rowKey="#{Rol.idrol}"
+					update="Perfiles" minHeight="500" maximizable="500">
+
+					<f:facet name="header">
+           				Perfiles
+      			 	</f:facet>
+
+					<p:column headerText="Id">
+						<h:outputText value="#{Rol.idrol}" />
+					</p:column>
+
+					<p:column headerText="Descripcion">
+						<h:outputText value="#{Rol.descripcion}" />
+					</p:column>
+					<p:column headerText="Editar" style="width:32px;text-align: center">
+						<p:commandButton title="Icon Only" icon="ui-icon-pencil"
+							update=":form1:perfilDetalle" onclick="PF('editarPerfil').show()"
+							action="#{mantenimientoPerfilesMB.cargaRol}"
+							style="border-radius: 5px; padding:10px; max-width:10px;"
+							rendered="true" maximizable="150" minHeight="100" value="">
+							<f:setPropertyActionListener value="#{Rol}"
+								target="#{mantenimientoPerfilesMB.catRol}" />
+						</p:commandButton>
+					</p:column>
+					<p:column headerText="Eliminar"
+						style="width:32px;text-align: center">
+						<p:commandButton title="Icon Only" icon="ui-icon-close"
+							style="border-radius: 5px; padding:10px; max-width:10px;"
+							rendered="true" maximizable="150" minHeight="100" value=""
+							actionListener="#{mantenimientoPerfilesMB.eliminarPerfil(Rol.idrol)}"
+							update="Perfiles">
+
+							<p:confirm header="Confirmar" message="¿Eliminar Perfil?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Continuar" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+
+							<p:commandButton value="Cancelar" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:column>
+				</p:dataTable>
+			</center>
+
+			<p:dialog id="nuevoPerfil" header="Nuevo Perfil" resizable="false"
+				widgetVar="nuevoPerfil" minHeight="200" position="center"
+				showeffect="clip" hideeffect="clip" maximizable="250"
+				update="Perfiles">
+				<h:panelGrid columns="2" cellpadding="5" id="nuevoPerfilGrid">
+					<p:outputLabel value="Descripcion:" styleClass="label" />
+					<p:inputText id="Descripcion"
+						value="#{mantenimientoPerfilesMB.descripcionInserta}"
+						style="width: 85%; height: 18px; font-size: 14px;"
+						Font-Names="Arial" />
+
+
+					<!--<p:selectCheckboxMenu  id="menuVistasCompletas" value="#{mantenimientoPerfilesMB.descripcionMenusSeleccionados}" label="Vistas"
+                              	filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                              			
+            					  <f:selectItems  value="#{mantenimientoPerfilesMB.descripcionMenus}"/>
+            					</p:selectCheckboxMenu>-->
+					<p:outputLabel value="Objetos por asignar:" styleClass="label" />
+
+					<p:selectCheckboxMenu id="menuObjetosCompletos"
+						value="#{mantenimientoPerfilesMB.descripcionObjetosSeleccionados}"
+						label="Objetos" filter="true" filterMatchMode="startsWith"
+						panelStyle="width:250px">
+
+						<f:selectItems
+							value="#{mantenimientoPerfilesMB.descripcionObjetos}" />
+					</p:selectCheckboxMenu>
+
+					<!--<p:outputLabel  value="Países por asignar:" styleClass="label"/>
+        					    
+        					    <p:selectCheckboxMenu  id="menuPaisesCompletos" value="#{mantenimientoPerfilesMB.descripcionPaisesSeleccionados}" label="Países"
+                              	filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                              	
+                              		  <f:selectItems  value="#{mantenimientoPerfilesMB.descripcionPaises}"/>
+            					</p:selectCheckboxMenu>-->
+					<p:outputLabel value="Vistas por asignar:" styleClass="label" />
+					<p:tree value="#{mantenimientoPerfilesMB.menuVistas}" var="doc"
+						selectionMode="checkbox"
+						selection="#{mantenimientoPerfilesMB.menuVistasSeleccionadas}">
+						<p:treeNode icon="ui-icon-note">
+							<h:outputText value="#{doc.vista}" />
+						</p:treeNode>
+						<p:treeNode type="text">
+							<h:outputText value="#{doc.vista}" />
+						</p:treeNode>
+					</p:tree>
+
+				</h:panelGrid>
+
+				<p:commandButton value="Registrar"
+					actionListener="#{mantenimientoPerfilesMB.insertaPerfiles(mantenimientoPerfilesMB.menuVistasSeleccionadas,mantenimientoPerfilesMB.descripcionObjetosSeleccionados)}"
+					update="Perfiles" onclick="PF('nuevoPerfil').close()" />
+			</p:dialog>
+
+			<p:dialog id="editarPerfil" header="Perfil Info"
+				widgetVar="editarPerfil" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false" update=":form1:Perfiles:">
+				<p:panelGrid columns="2" id="perfilDetalle">
+
+					<h:outputText value="Id:" />
+					<p:inputText id="idEditar"
+						readonly="#{facesContext.renderResponse}"
+						value="#{mantenimientoPerfilesMB.idRol}" />
+
+					<h:outputText value="Descripcion" />
+					<p:inputText id="descripcionEditar"
+						value="#{mantenimientoPerfilesMB.descripcion}" />
+
+
+					<p:outputLabel value="Objetos Asignados:" styleClass="label" />
+
+					<p:selectCheckboxMenu id="menuObjetosCompletosManto"
+						value="#{mantenimientoPerfilesMB.descripcionObjetosSeleccionadosManto}"
+						label="Objetos" filter="true" filterMatchMode="startsWith"
+						panelStyle="width:250px">
+
+						<f:selectItems
+							value="#{mantenimientoPerfilesMB.descripcionObjetosManto}" />
+					</p:selectCheckboxMenu>
+
+
+					<p:outputLabel value="Vistas Asignadas:" styleClass="label" />
+					<p:tree id="arbol"
+						value="#{mantenimientoPerfilesMB.menuVistasManto}" var="doc"
+						selectionMode="checkbox"
+						selection="#{mantenimientoPerfilesMB.menuVistasSeleccionadasManto}"
+						widgetVar="treeSingleWidget">
+
+						<p:treeNode type="text">
+							<h:outputText value="#{doc.vista}" />
+						</p:treeNode>
+					</p:tree>
+					<!--<h:outputText value="Vistas Asignadas" />
+
+								<p:treeNode icon="ui-icon-note">
+							            <h:outputText value="#{doc.vista}"/>
+							        </p:treeNode>
+        						  	<p:selectCheckboxMenu  id="menuVistas" value="#{mantenimientoPerfilesMB.descripcionesSeleccionadas}" label="Vistas"
+                              			 filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                              			
+            					  		<f:selectItems  value="#{mantenimientoPerfilesMB.descripcionMantoMenuRol}"/>
+            					 	</p:selectCheckboxMenu>-->
+
+					<p:commandButton value="Guardar"
+						actionListener="#{mantenimientoPerfilesMB.editarPerfil(mantenimientoPerfilesMB.menuVistasSeleccionadasManto,mantenimientoPerfilesMB.descripcionObjetosSeleccionadosManto)}"
+						update=":form1:Perfiles:">
+						<p:confirm header="Confirmar" message="¿Realizar modificaciones?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Continuar" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Cancelar" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:panelGrid>
+			</p:dialog>
+
+		</ui:define>
+
+		<ui:define name="footer">
+			<h2>This is page1 Footer</h2>
+		</ui:define>
+
+	</ui:composition>
+	<h2>This is page1 content</h2>
+
+</h:body>
+
+</html>

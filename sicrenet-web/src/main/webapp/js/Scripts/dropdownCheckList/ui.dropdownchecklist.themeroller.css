@@ -1,0 +1,74 @@
+/** Simple modifications needed for DropDownCheckList to take advantage of ThemeRoller settings */
+.ui-dropdownchecklist .ui-widget-content, .ui-dropdownchecklist .ui-widget-header
+{
+    border: none;
+}
+.ui-dropdownchecklist-indent
+{
+    padding-left: 7px;
+}
+/* Font size of 0 on the -selector and an explicit medium on -text required to eliminate 
+   descender problems within the containers and still have a valid size for the text */
+.ui-dropdownchecklist-selector-wrapper, .ui-widget.ui-dropdownchecklist-selector-wrapper
+{
+    vertical-align: middle;
+    font-size: 13px;
+}
+.ui-dropdownchecklist-selector
+{
+    padding: 1px 2px 2px 2px;
+    font-size: 0px;
+    background: white;
+    border-color: Gray;
+    color: Black; 
+    font-family: Verdana, Geneva, sans-serif;
+    text-shadow: 0px 0px 0px rgb(0, 0, 0);
+    font-size: 13px;
+}
+.ui-dropdownchecklist-text
+{
+    font-size: 11px;
+}
+.ui-dropdownchecklist-item, .ui-dropdownchecklist-item input
+{
+    vertical-align: middle;
+}
+.ui-dropdownchecklist-group
+{
+    padding: 1px 2px 2px 2px;
+}
+
+div.ui-dropdownchecklist-dropcontainer.ui-widget-content
+{
+    border: 1px solid Gray;
+}
+
+div.ui-dropdownchecklist-item.ui-state-default
+{
+    border: 0px solid Gray;
+    background: White;
+    color: Black;
+    font-family: Verdana, Geneva, sans-serif;
+    text-shadow: 0px 0px 0px rgb(0, 0, 0);
+    font-size: 13px;
+}
+
+div.ui-dropdownchecklist-item.ui-state-default.ui-state-hover
+{
+    border: 0px solid Gray;
+    background: rgb(194, 194, 194);
+    color: Black;
+    font-family: Verdana, Geneva, sans-serif;
+    text-shadow: 0px 0px 0px rgb(0, 0, 0);
+    font-size: 13px;
+}
+
+.ui-state-default .ui-icon
+{
+    background-image: url(../../images/PanelDeControl/ui-icons_d8e7f3_256x240.png);
+}
+
+.ui-state-active .ui-icon
+{
+    background-image: url(../../images/PanelDeControl/ui-icons_d8e7f3_256x240.png);
+}

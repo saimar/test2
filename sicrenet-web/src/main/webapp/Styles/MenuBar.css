@@ -1,0 +1,31 @@
+		.menubar 
+		{
+/*      	margin-left: 9%;      */
+      	font-size: 8px;      
+  		font-weight: bold; 
+  		color:white;
+		background-color: #007561!important;
+/*  		position: absolute;  */
+/*   		padding: 5px;   */
+/*   		top: -2px;   */
+		}
+	.ui-menu .ui-menuitem-text 
+		{
+   		 float: left;
+    	 color: white;
+		}
+		
+		.ui-menu .ui-menu-parent .ui-icon-triangle-1-e,
+		 .ui-menu .ui-menu-parent .ui-icon-triangle-1-s,
+		  .ui-menubar .ui-menu-child .ui-icon-triangle-1-s, 
+		  .ui-menubar .ui-menu-child .ui-icon-triangle-1-s 
+		{
+		    float: right;
+		 	color: white;   
+		}
+		.ui-menu, .ui-menu .ui-menu-child {
+    background: #c4c4c4 url(/sicrenet-web/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.xhtml?ln=primefaces-aristo) top repeat-x;
+    background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    background: #007556 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
+    background: #c4c4c4 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+ }

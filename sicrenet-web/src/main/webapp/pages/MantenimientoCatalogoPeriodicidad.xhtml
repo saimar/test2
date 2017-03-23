@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:body>
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+			<!-- 			<h:form id="formMsj" prependId="false"> -->
+			<!-- 				<br /> -->
+			<!-- 				<br /> -->
+			<!-- 				<p:messages id="mensajes" showDetail="true" autoUpdate="true" /> -->
+			<!-- 			</h:form> -->
+
+			<br />
+			<br />
+			<br />
+			<p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" life="2000"/>
+
+			<center>
+
+
+				<p:commandButton id="toltipNuevaPeriodicidad" value="Nuevo Periodicidad"
+					onclick="PF('dlg7').show();" position="center" align="center"
+					Class="classButtonUsuarios" resizable="false" showEffect="clip"
+					hideEffect="clip" minHeight="100" maximizable="150"
+					icon="ui-icon-new"
+					actionListener="#{mantenimientoCatalogoPeriodicidad.limpiar}">
+				</p:commandButton>
+
+				<p:tooltip id="toolTipGrow" for="toltipNuevaPeriodicidad"
+					value="Agregar Nueva Periodicidad" showEffect="clip" position="top" />
+
+				<p:dataTable id="RefrehsTable" var="periodicidad"
+					value="#{mantenimientoCatalogoPeriodicidad.listCatPeriodicidad}" rows="10"
+					style="border-radius: 80px; padding: 10px; max-width: 800px; color: #FFFFFF;"
+					minHeight="200" maximizable="300" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="1,5,10,15" styleClass="table table-hover"
+					selection="#{mantenimientoCatalogoPeriodicidad.seleccionadoPeriodicidad}"
+					rowKey="#{periodicidad.idPeriodicidad}" update=":form1">
+					<p></p>
+					<f:facet name="header"
+						style="text-align:center; background-color:#C6C3C6;padding:12px;">
+           				Face
+      			 	</f:facet>
+					<p></p>
+
+
+
+					
+
+					<p:column headerText="DESCRIPCIÓN DEL PERIODICIDAD"
+						style="border-radius: 5px; padding:5px; max-width:5px;">
+
+						<h:outputText value="#{periodicidad.tipo}"
+							style="width: 15; height: 10px; font-size: 10px;"
+							Font-Names="Arial" />
+					</p:column>
+
+					<p:column headerText="ESTATUS" sortFunction="label"
+						style="border-radius: 5px; padding:5px; max-width:5px;">
+
+						<h:outputText value="#{periodicidad.estatus}"
+							style="width: 15; height: 10px; font-size: 10px;"
+							Font-Names="Arial" />
+
+					</p:column>
+
+
+					<p:column headerText="EDITAR"
+						style="border-radius: 1px; padding:1px; max-width:1px;">
+						<center>
+							<p:commandButton value="" icon="ui-icon-pencil"
+								update=":form1:panelGridActualizaPeriodicidad"
+								style="border-radius: 5px; padding:10px; max-width:10px;"
+								maximizable="150" minHeight="100" onclick="PF('dlg6').show();"
+								process="@this" action="#{mantenimientoCatalogoPeriodicidad.CargaCatPeriodicidadActualizar}"
+								rendered="true">
+								<f:setPropertyActionListener value="#{periodicidad}"
+									target="#{mantenimientoCatalogoPeriodicidad.seleccionadoPeriodicidad}" />
+							</p:commandButton>
+
+						</center>
+
+					</p:column>
+
+				</p:dataTable>
+
+
+
+				<p:dialog id="RefrehsDialogNuevo" header="Nuevo Periodicidad"
+					widgetVar="dlg7" resizable="false" showEffect="clip"
+					hideEffect="clip" minHeight="200" maximizable="250"
+					position="center" update="RefrehsTable" modal="false">
+
+					<h:panelGrid columns="2" id="panelGridAgregarNuevo">
+
+						
+
+						<p:outputLabel for="descAgrega" value="Descripción:"
+							styleClass="label" />
+						<p:inputText id="descAgrega"
+							value="#{mantenimientoCatalogoPeriodicidad.descripcionAgregar}"
+							style="width: 85%; height: 18px; font-size: 12px;"
+							Font-Names="Arial" placeholder="Descripción..." />
+
+					</h:panelGrid>
+					<p:commandButton value="Aceptar" styleClass="ui-confirmdialog-yes"  icon="ui-icon-check"
+						actionListener="#{mantenimientoCatalogoPeriodicidad.agregarCatPeriodicidad}"
+						update=":form1:RefrehsTable,growl">
+					</p:commandButton>
+
+
+
+
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						onclick="dlg7.hide()"
+						action="#{mantenimientoCatalogoPeriodicidad.limpiar}"
+						update=":form1:RefrehsTable" />
+
+
+
+				</p:dialog>
+
+
+			</center>
+
+
+			<p:dialog id="RefrehsDialogActualiza" header="Actualizar Periodicidad"
+				widgetVar="dlg6" resizable="false" showEffect="clip"
+				hideEffect="clip" minHeight="200" maximizable="250"
+				position="center" modal="false">
+
+				<h:panelGrid columns="2" id="panelGridActualizaPeriodicidad">
+
+					
+					<p:outputLabel for="descripcionValidate" value="Descripción:"
+						styleClass="label" />
+					<p:inputText id="descripcionValidate"
+						value="#{mantenimientoCatalogoPeriodicidad.descripcion}"
+						style="width: 85%; height: 18px; font-size: 12px;"
+						Font-Names="Arial" placeholder="Descripción..." />
+
+
+					<p:outputLabel value="Estatus:" styleClass="label" />
+					<p:selectOneMenu value="#{mantenimientoCatalogoPeriodicidad.estatus}"
+						style="width: 170px; height: 18px; font-size: 14px;"
+						Font-Names="Arial">
+						<f:selectItem itemLabel="--Selecciona..." />
+						<f:selectItem itemLabel="Alta" itemValue="1" />
+						<f:selectItem itemLabel="Baja" itemValue="0" />
+
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<p:commandButton value="Actualizar"  icon="ui-icon-check"
+					action="#{mantenimientoCatalogoPeriodicidad.actualizarCatPeriodicidad}"
+					styleClass="ui-confirmdialog-yes"
+					update=":form1:RefrehsTable,descripcionValidate,growl">
+				</p:commandButton>
+
+				<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-yes"
+					action="#{mantenimientoCatalogoPeriodicidad.limpiar}" onclick="dlg6.hide()" />
+
+
+
+
+
+
+
+
+
+			</p:dialog>
+
+
+
+
+		</ui:define>
+
+		<ui:define name="footer">
+
+
+
+		</ui:define>
+
+	</ui:composition>
+	
+
+</h:body>
+
+</html>

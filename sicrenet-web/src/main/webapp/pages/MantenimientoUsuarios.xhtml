@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:body>
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	<link href="Styles/Mantenimiento.css" rel="stylesheet" type="text/css" />
+
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+			<!-- 			<h:form id="formMsj1" prependId="false"> -->
+			<!-- 				<br /> -->
+			<!-- 				<br /> -->
+			<!-- 				<p:messages id="mensajesS" showDetail="true" autoUpdate="true" /> -->
+			<!-- 			</h:form> -->
+			<br />
+			<br />
+			<br />
+			<p:growl id="growl" showDetail="true" sticky="true" />
+
+			<div align="center">
+
+				<div>
+					<p:commandButton id="toltipNuevoUsuario" value="Nuevo Usuario"
+						onclick="PF('dlg7').show();" position="center" align="center"
+						resizable="false" showEffect="clip" hideEffect="clip"
+						minHeight="100" maximizable="150" icon="ui-icon-new"
+						actionListener="#{mantenimientoUser.limpiar}">
+					</p:commandButton>
+
+					<p:tooltip id="toolTipGrow" for="toltipNuevoUsuario"
+						value="Agregar Nuevo Usuario" showEffect="clip" position="top" />
+				</div>
+				<div>
+					<p:dataTable id="RefrehsTable" var="usuario"
+						value="#{mantenimientoUser.listUsuariosVO}" rows="10"
+						style="border-radius: 80px; padding: 10px; max-width: 800px;"
+						minHeight="200" maximizable="300" paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="1,5,10,15"
+						selection="#{mantenimientoUser.selecteduuser}"
+						rowKey="#{usuario.idusuario}" update=":form1"
+						rowStyleClass="#{usuario.numempleado == '196142' ? 'background: #ffffff;' : ''}"
+						rowIndexVar="rowIndex">
+						<p></p>
+
+						<p></p>
+
+						<p:column headerText="NÚMERO DE EMPLEADO" styleClass="label">
+							<h:outputText value="#{usuario.numempleado}"
+								styleClass="columnTable" />
+
+						</p:column>
+
+						<p:column headerText="CENTRO DE COSTOS" styleClass="label">
+
+							<h:outputText value="#{usuario.centrocostos}" 
+								styleClass="columnTable" />
+
+						</p:column>
+
+						<p:column headerText="NOMBRE" styleClass="label">
+							<h:outputText value="#{usuario.nombre}" styleClass="columnTable" />
+						</p:column>
+
+						<p:column headerText="AREA" styleClass="label">
+							<h:outputText value="#{usuario.direccion}"
+								styleClass="columnTable" />
+						</p:column>
+						<center>
+							<p:column headerText="BLOQUEADO" styleClass="label">
+								<h:outputText value="#{usuario.desBloqueo}"
+									styleClass="columnTable" />
+							</p:column>
+						</center>
+						<center>
+							<p:column headerText="ESTATUS" styleClass="label">
+								<h:outputText value="#{usuario.desEstatus}"
+									styleClass="columnTable" />
+							</p:column>
+						</center>
+						<p:column headerText="EDITAR">
+							<center>
+
+								<p:commandButton id="toltipBuscarUsuario" value="Editar"
+									icon="ui-icon-pencil"
+									update=":form1:panelGridActualizaUsuarios" position="center"
+									align="center" onclick="PF('dlg6').show();"
+									action="#{mantenimientoUser.CargaUsuarios}">
+									<f:setPropertyActionListener value="#{usuario}"
+										target="#{mantenimientoUser.selecteduuser}" />
+								</p:commandButton>
+								<p:tooltip for="toltipBuscarUsuario" value="Actualizar Usuario"
+									showEffect="clip" position="top" />
+
+
+
+							</center>
+						</p:column>
+
+					</p:dataTable>
+
+				</div>
+
+
+
+
+
+
+				<div>
+
+					<p:dialog id="RefrehsDialogNuevo" header="Nuevo Usuario"
+						widgetVar="dlg7" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="200" maximizable="250"
+						position="center" update="RefrehsTable" modal="true"
+						closable="false">
+
+
+						<div>
+							<h:panelGrid columns="2" id="panelGridAgregarNuevoUsuario">
+
+
+								<p:outputLabel for="numEmple" value="Numero de Empleado :"
+									styleClass="label" />
+								<p:inputText id="numEmple"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoUser.numEmpleadoAgregaUsuarioNuevo}"
+									placeholder="N° de Empleado...">
+									<!-- 												<f:validateLength minimum="6" /> -->
+									<!-- 												<f:validator validatorId="validateNumerico"/> -->
+								</p:inputText>
+
+
+								<p:outputLabel for="rolRequiere" value="Rol :"
+									styleClass="label" />
+								<p:selectOneMenu id="rolRequiere"
+									style=" width: 208px; height: 25px;  font-size: 12px;"
+									value="#{mantenimientoUser.listaDesplegableMenuRol}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems value="#{mantenimientoUser.listaRoles}"
+										var="listaRo" itemValue="#{listaRo.idrol}"
+										itemLabel="#{listaRo.descripcion}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="paisRequiere" value="Pais :"
+									styleClass="label" />
+								<p:selectOneMenu id="paisRequiere"
+									style=" width: 208px; height: 25px;  font-size: 12px;"
+									value="#{mantenimientoUser.idPaisAgrega}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems value="#{mantenimientoUser.listaPais}"
+										var="listaPais" itemValue="#{listaPais.idPais}"
+										itemLabel="#{listaPais.descripcion}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Paises por Asignar:" styleClass="label" />
+
+								<p:selectCheckboxMenu id="menuPaisesCompletos"
+									style=" width: 208px; height: 25px;  font-size: 12px;"
+									value="#{mantenimientoUser.listaidpais}" label="Paises"
+									filter="true" filterMatchMode="startsWith"
+									panelStyle="width:250px">
+									<f:selectItem itemLabel="--Selecciona..."
+										noSelectionOption="true" itemDisabled="true" />
+									<f:selectItems value="#{mantenimientoUser.listaPais}"
+										var="listaPais" itemValue="#{listaPais.idPais}"
+										itemLabel="#{listaPais.descripcion}" />
+
+
+								</p:selectCheckboxMenu>
+
+								<p:outputLabel for="centroCo" value="Centro de Costos :"
+									styleClass="label" />
+								<p:inputText id="centroCo"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoUser.centroCostosAgregaUsuarioNuevo}"
+									placeholder="Centro de Costos...">
+									<!-- 						<f:validateLength minimum="6" maximum="6" /> -->
+									<!-- 						<f:validator validatorId="validateNumerico"/> -->
+								</p:inputText>
+
+
+								<p:outputLabel for="nom" value="Nombre(s) :" styleClass="label" />
+								<p:inputText id="nom"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoUser.nombreAgregaUsuarioNuevo}"
+									placeholder="Nombre o Nombres...">
+									<!-- 						<f:validateLength minimum="2"/> -->
+									<!-- 												<f:validator validatorId="validateCadena"/> -->
+								</p:inputText>
+
+
+								<p:outputLabel for="ape1" value="Apellido 1 :"
+									styleClass="label" />
+								<p:inputText id="ape1"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoUser.apellido1AgregaUsuarioNuevo}"
+									placeholder="Apellido 1...">
+									<!-- 						<f:validateLength minimum="2"/> -->
+									<!-- 												<f:validator validatorId="validateCadena"/> -->
+								</p:inputText>
+
+
+								<p:outputLabel for="ape2" value="Apellido 2 :"
+									styleClass="label" />
+								<p:inputText id="ape2"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoUser.apellido2AgregaUsuarioNuevo}"
+									placeholder="Apellido 2...">
+									<!-- 						<f:validateLength minimum="2"/> -->
+									<!-- 												<f:validator validatorId="validateCadena"/> -->
+								</p:inputText>
+
+
+								<p:outputLabel for="dire" value="Direcion:" styleClass="label" />
+								<p:inputText id="dire"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoUser.direccionAgregaUsuarioNuevo}"
+									placeholder="Direccion o Area...">
+									<!-- 						<f:validateLength minimum="2"/> -->
+									<!-- 												<f:validator validatorId="validateCadena"/> -->
+								</p:inputText>
+
+
+								<p:outputLabel for="admin" value="Administracion :"
+									styleClass="label" />
+								<p:inputText id="admin"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoUser.administracionAgregaUsuarioNuevo}"
+									placeholder="Gerencia...">
+									<!-- 						<f:validateLength minimum="2"/> -->
+									<!-- 												<f:validator validatorId="validateCadena"/> -->
+								</p:inputText>
+
+
+								<p:outputLabel for="correoValidate" value="Correo:"
+									styleClass="label" />
+								<p:inputText id="correoValidate"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									value="#{mantenimientoUser.correoAgregaUsuarioNuevo}"
+									placeholder="Correo...">
+									<!-- 												<f:validator  validatorId="validateEmail"  /> -->
+								</p:inputText>
+
+
+
+								<p:outputLabel value="Acceso Denegado" />
+
+								<p:selectBooleanCheckbox
+									value="#{mantenimientoUser.accesoDenegadoAgregarUsuarioNuevo}" />
+
+
+
+							</h:panelGrid>
+						</div>
+						<div align="center">
+							<br></br>
+							<p:commandButton value="Aceptar"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+								actionListener="#{mantenimientoUser.AgregaUsuario}"
+								update=":form1:RefrehsTable,panelGridAgregarNuevoUsuario,growl,centroCo" />
+
+
+
+							<p:commandButton value="Cancelar"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close"
+								onclick="dlg7.hide()" action="#{mantenimientoUser.limpiar}"
+								update=":form1:RefrehsTable,numEmple,nom,rolRequiere,centroCo,ape1,ape2,dire,admin,correoValidate, paisRequiere,menuPaisesCompletos">
+								<f:ajax event="click" />
+							</p:commandButton>
+						</div>
+
+					</p:dialog>
+				</div>
+
+
+				<p:dialog id="RefrehsDialogActualiza" header="Actualizar Usuario"
+					widgetVar="dlg6" resizable="false" showEffect="clip"
+					hideEffect="clip" minHeight="200" maximizable="250"
+					position="center" update="RefrehsTable" modal="true"
+					closable="false">
+					<div>
+						<h:panelGrid columns="2" id="panelGridActualizaUsuarios">
+
+							<p:outputLabel for="numEmpleadoActualiza"
+								value="Numero de Empleado:" styleClass="label" />
+							<p:inputText id="numEmpleadoActualiza"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.idEmpleado}">
+								<!-- 							<f:validator validatorId="validateNumerico"/> -->
+							</p:inputText>
+
+							<p:outputLabel for="rolActualiza" value="Rol:" styleClass="label" />
+							<p:selectOneMenu id="rolActualiza"
+								style=" width: 208px; height: 25px;  font-size: 12px;"
+								value="#{mantenimientoUser.idRolOneMenuActualizaUsuario}">
+								<f:selectItems value="#{mantenimientoUser.listaRoles}"
+									var="listaRo" itemValue="#{listaRo.idrol}"
+									itemLabel="#{listaRo.descripcion}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel for="paisActualiza" value="Pais :"
+								styleClass="label" />
+							<p:selectOneMenu id="paisActualiza"
+								style=" width: 208px; height: 25px;  font-size: 12px;"
+								value="#{mantenimientoUser.idPaisActualiza}">
+								<f:selectItem itemLabel="--Selecciona..." />
+								<f:selectItems value="#{mantenimientoUser.listaPais}"
+									var="listaPais" itemValue="#{listaPais.idPais}"
+									itemLabel="#{listaPais.descripcion}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Paises Asignados:" styleClass="label" />
+
+							<p:selectCheckboxMenu id="menuPaisesCompletosActualiza"
+								style=" width: 208px; height: 25px;  font-size: 12px;"
+								value="#{mantenimientoUser.listaidpaisActualiza}" label="Paises"
+								filter="true" filterMatchMode="startsWith"
+								panelStyle="width:250px">
+								<f:selectItem itemLabel="--Selecciona..."
+									noSelectionOption="true" itemDisabled="true" />
+								<f:selectItems value="#{mantenimientoUser.listaPais}"
+									var="listaMantoUsrPais" itemValue="#{listaMantoUsrPais.idPais}"
+									itemLabel="#{listaMantoUsrPais.descripcion}" />
+							</p:selectCheckboxMenu>
+
+							<p:outputLabel for="estatusActualizacionPais"
+								value="Estatus del Pais:" styleClass="label" />
+							<p:selectOneMenu id="estatusActualizacionPais"
+								style=" width: 208px; height: 25px;  font-size: 12px;"
+								value="#{mantenimientoUser.estatusPais}">
+								<f:selectItem itemLabel="--Selecciona..." />
+								<f:selectItem itemLabel="Alta" itemValue="1" />
+								<f:selectItem itemLabel="Baja" itemValue="0" />
+
+							</p:selectOneMenu>
+
+							<p:outputLabel for="centroCostosActualiza"
+								value="Centro de Costos:" styleClass="label" />
+							<p:inputText id="centroCostosActualiza"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.centroCostos}">
+								<!-- 						<f:validator validatorId="validateNumerico"/> -->
+							</p:inputText>
+
+							<p:outputLabel for="nomActualiza" value="Nombre(s):"
+								styleClass="label" />
+							<p:inputText id="nomActualiza"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.nombre}" />
+
+							<p:outputLabel for="ape1Actualiza" value="Apellido 1:"
+								styleClass="label" />
+							<p:inputText id="ape1Actualiza"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.apellido1}" />
+
+							<p:outputLabel for="ape2Actualiza" value="Apellido 2:"
+								styleClass="label" />
+							<p:inputText id="ape2Actualiza"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.apellido2}" />
+
+							<p:outputLabel for="direActualiza" value="Direcion:"
+								styleClass="label" />
+							<p:inputText id="direActualiza"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.direccion}" />
+
+							<p:outputLabel for="adminActualiza" value="Administracion:"
+								styleClass="label" />
+							<p:inputText id="adminActualiza"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.administracion}" />
+
+							<p:outputLabel for="correoActualiza" value="Correo:"
+								styleClass="label" />
+							<p:inputText id="correoActualiza"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.correo}" />
+
+							<p:outputLabel value="Acceso Denegado" />
+
+							<p:selectBooleanCheckbox
+								value="#{mantenimientoUser.accesoDenegado}" />
+
+							<p:outputLabel for="estatusActualizacion" value="Estatus:"
+								styleClass="label" />
+							<p:selectOneMenu id="estatusActualizacion"
+								style=" width: 200px; height: 18px;  font-size: 12px;"
+								value="#{mantenimientoUser.estatus}">
+								<f:selectItem itemLabel="--Selecciona..." />
+								<f:selectItem itemLabel="Alta" itemValue="1" />
+								<f:selectItem itemLabel="Baja" itemValue="0" />
+
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</div>
+					<div align="center">
+						<br></br>
+						<p:commandButton value="Actualizar" icon="ui-icon-check"
+							action="#{mantenimientoUser.ActualizaUsuarios}"
+							styleClass="ui-confirmdialog-yes"
+							update="RefrehsTable,RefrehsDialogActualiza,growl" />
+
+
+
+						<p:commandButton value="Cancelar" icon="ui-icon-close"
+							styleClass="ui-confirmdialog-yes"
+							action="#{mantenimientoUser.limpiar}" onclick="dlg6.hide()"
+							update=":form1:RefrehsTable,numEmpleadoActualiza,
+rolActualiza,
+centroCostosActualiza,
+nomActualiza,
+ape1Actualiza,
+ape2Actualiza,
+direActualiza,
+adminActualiza,
+correoActualiza,
+estatusActualizacion,
+paisActualiza,
+menuPaisesCompletosActualiza,
+estatusActualizacionPais">
+							<f:ajax event="click" />
+						</p:commandButton>
+
+					</div>
+				</p:dialog>
+
+			</div>
+
+
+		</ui:define>
+
+		<ui:define name="footer">
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+
+</h:body>
+
+</html>

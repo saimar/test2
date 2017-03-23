@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+<p:panel id="panelDetalleReproceso">
+
+	<p:dataTable id="tblDetalleReproceso" var="reproceso"
+		rows="15" value="#{panelControl.listBitFuente}"
+		style="border-radius: 80px; padding: 10px; max-width: 800px;"
+		minHeight="200" maximizable="300" paginator="true"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+		{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}
+		 {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,15"
+		update=":form1" editable="true" >
+		
+		<p:column headerText="Fuente" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial"
+				required="true" value="#{reproceso.fuente}"/>
+		</p:column>		
+		<p:column headerText="Periodo" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial"
+				required="true" value="#{reproceso.periodo}"/>
+		</p:column>
+
+		<p:column headerText="Fecha Inicio" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial"
+				value="#{reproceso.finicio}" />
+		</p:column>
+		<p:column headerText="Fecha Fin" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial" />
+		</p:column>
+		<p:column headerText="Estatus" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial" 
+				value="#{reproceso.ffin}"/>
+		</p:column>
+		<p:column headerText="Reglas" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial" 
+				value="#{reproceso.estatus}"/>
+		</p:column>
+		<p:column headerText="Monto" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial" 
+				value="#{reproceso.monto}"/>
+		</p:column>
+		<p:column headerText="Reproceso" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial" 
+				value="#{reproceso.reprocesos}"/>
+		</p:column>
+		<p:column headerText="Error" styleClass="label">
+			<h:outputText 
+				style="width: 15; height: 10px; font-size: 11px;" Font-Names="Arial" 
+				value="#{reproceso.error}"/>
+		</p:column>
+	</p:dataTable>
+
+</p:panel>
+</html>

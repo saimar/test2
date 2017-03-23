@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:body>
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+			<!-- 			<h:form id="formMsj" prependId="false"> -->
+			<!-- 				<br /> -->
+			<!-- 				<br /> -->
+			<!-- 				<p:messages id="mensajes" showDetail="true" autoUpdate="true" /> -->
+			<!-- 			</h:form> -->
+
+			<br />
+			<br />
+			<br />
+			<p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true"
+				life="2000" />
+
+			<div align="center">
+
+				<div>
+
+					<p:commandButton id="toltipNuevaNegocio" value="Nuevo Negocio"
+						onclick="PF('dlg7').show();" position="center" align="center"
+						Class="classButtonUsuarios" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="100" maximizable="150"
+						icon="ui-icon-new"
+						actionListener="#{mantenimientoCatalogoNegocio.limpiar}">
+					</p:commandButton>
+
+					<p:tooltip id="toolTipGrow" for="toltipNuevaNegocio"
+						value="Agregar Nuevo Negocio" showEffect="clip" position="top" />
+				</div>
+				<div>
+					<p:dataTable id="RefrehsTable" var="negocio"
+						value="#{mantenimientoCatalogoNegocio.listCatNegocio}" rows="10"
+						style="border-radius: 80px; padding: 10px; max-width: 800px; color: #FFFFFF;"
+						minHeight="200" maximizable="300" paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="1,5,10,15" styleClass="table table-hover"
+						selection="#{mantenimientoCatalogoNegocio.seleccionadoNegocio}"
+						rowKey="#{negocio.idNegocio}" update=":form1">
+						<p></p>
+						<f:facet name="header"
+							style="text-align:center; background-color:#C6C3C6;padding:12px;">
+           				Negocio
+      			 	</f:facet>
+						<p></p>
+
+
+
+
+
+						<p:column headerText="DESCRIPCIÓN DEL NEGOCIO" styleClass="label">
+							<h:outputText value="#{negocio.descripcion}"
+								styleClass="columnTable" />
+						</p:column>
+
+						<p:column headerText="ESTATUS" styleClass="label">
+							<h:outputText value="#{negocio.desEstatus}"
+							 styleClass="columnTable" />
+
+						</p:column>
+
+
+						<p:column headerText="EDITAR"
+							style="border-radius: 25px; padding:1px; max-width:25px;">
+							<center>
+								<p:commandButton value="Editar" icon="ui-icon-pencil"
+									update=":form1:panelGridActualizaNegocio"
+									onclick="PF('dlg6').show();"
+									action="#{mantenimientoCatalogoNegocio.CargaCatNegocioActualizar}">
+									<f:setPropertyActionListener value="#{negocio}"
+										target="#{mantenimientoCatalogoNegocio.seleccionadoNegocio}" />
+								</p:commandButton>
+
+							</center>
+
+						</p:column>
+
+					</p:dataTable>
+				</div>
+
+				<div>
+					<p:dialog id="RefrehsDialogNuevo" header="Nuevo Negocio"
+						widgetVar="dlg7" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="200" maximizable="250"
+						position="center" update="RefrehsTable" modal="true"
+						closable="false">
+						<div>
+							<h:panelGrid columns="2" id="panelGridAgregarNuevo">
+
+
+
+								<p:outputLabel for="descAgrega" value="Descripción:"
+									styleClass="label" />
+								<p:inputText id="descAgrega"
+									value="#{mantenimientoCatalogoNegocio.descripcionAgregar}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Descripción..." />
+
+							</h:panelGrid>
+						</div>
+						<div align="center">
+							<br></br>
+							<p:commandButton value="Aceptar"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+								actionListener="#{mantenimientoCatalogoNegocio.agregarCatNegocio}"
+								update=":form1:RefrehsTable,growl">
+							</p:commandButton>
+
+
+
+
+							<p:commandButton value="Cancelar"
+								styleClass="ui-confirmdialog-no" onclick="dlg7.hide()"
+								icon="ui-icon-close"
+								action="#{mantenimientoCatalogoNegocio.limpiar}"
+								update=":form1:RefrehsTable" />
+
+
+						</div>
+					</p:dialog>
+				</div>
+
+
+
+
+				<p:dialog id="RefrehsDialogActualiza" header="Actualizar Negocio"
+					widgetVar="dlg6" resizable="false" showEffect="clip"
+					hideEffect="clip" minHeight="200" maximizable="250"
+					position="center" update="RefrehsTable" modal="true"
+					closable="false">
+
+					<h:panelGrid columns="2" id="panelGridActualizaNegocio">
+
+
+						<p:outputLabel for="descripcionValidate" value="Descripción:"
+							styleClass="label" />
+						<p:inputText id="descripcionValidate"
+							value="#{mantenimientoCatalogoNegocio.descripcion}"
+							style=" width: 200px; height: 18px;  font-size: 12px;"
+							placeholder="Descripción..." />
+
+
+						<p:outputLabel value="Estatus:" styleClass="label" />
+						<p:selectOneMenu value="#{mantenimientoCatalogoNegocio.estatus}"
+							style=" width: 208px; height: 25px;  font-size: 12px;">
+							<f:selectItem itemLabel="--Selecciona..." />
+							<f:selectItem itemLabel="Alta" itemValue="1" />
+							<f:selectItem itemLabel="Baja" itemValue="0" />
+
+						</p:selectOneMenu>
+					</h:panelGrid>
+
+					<p:commandButton value="Actualizar" icon="ui-icon-check"
+						action="#{mantenimientoCatalogoNegocio.actualizarCatNegocio}"
+						styleClass="ui-confirmdialog-yes"
+						update=":form1:RefrehsTable,descripcionValidate,growl">
+					</p:commandButton>
+
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-yes"
+						icon="ui-icon-close"
+						action="#{mantenimientoCatalogoNegocio.limpiar}"
+						onclick="dlg6.hide()" />
+
+
+
+
+
+
+
+
+
+				</p:dialog>
+			</div>
+
+
+
+		</ui:define>
+
+		<ui:define name="footer">
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+
+</h:body>
+
+</html>

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+<p:panel id="panelCedulaCarga">
+<table id="tblContenidoproyectosCarga" width="100%" class="dataGridDatos"
+	style="font-size: 9px;">
+
+	<thead>
+		<tr><th colspan="2"><p:outputLabel value="#{panelDeControlCedulaMB.titulo}" /> </th></tr>
+		<tr style="font-size: 9px;">
+			<th><p:outputLabel value="CONCEPTO" /></th>
+			<th><p:outputLabel value="DESCRIPCION" /></th>
+		</tr>
+	</thead>
+	<tr>
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+		<p:outputLabel
+				value="NOMBRE" />
+				</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<p:inputText value="#{panelDeControlCedulaMB.nombre}" id="lbCarga_0"
+				style="background-color:#dddddd;width:98%; 
+					text-align:left; border: none;font-size: 9px;"
+				readonly="#{panelDeControlCedulaMB.readOnly}" rendered="true"/>
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+			<p:outputLabel value="NOMBRE SISTEMAS" />
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<p:inputText id="lbCarga_1"
+				value="#{panelDeControlCedulaMB.nombreSistema}"
+				style="background-color:#dddddd;width:98%; text-align:left; border: none;font-size: 9px;"
+				readonly="#{panelDeControlCedulaMB.readOnly}" rendered="true"/>
+		</td>
+	</tr>
+	<tr class="row" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+			<p:outputLabel value="SISTEMA" />
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+<!-- 			<p:inputText id="lb_2" value="#{panelDeControlCedulaMB.sistema}" -->
+<!-- 				style="background-color:#dddddd;width:98%; text-align:left; border: none;font-size: 9px;" -->
+<!-- 				readonly="#{panelDeControlCedulaMB.readOnly}" /> -->
+        	<p:selectOneMenu id="sistema" value="#{panelDeControlCedulaMB.idSistema}" 
+        			disabled="#{panelDeControlCedulaMB.readOnly}" required="true">
+					<f:selectItem itemLabel="--Seleccionar--" itemValue="0"/>
+					<f:selectItems value="#{panelDeControlCedulaMB.listCatsistema}" 
+					var="sistema" itemLabel="#{sistema.sistema}" itemValue="#{sistema.idSist}"/>
+        	</p:selectOneMenu>
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+			<p:outputLabel value="ORIGEN" />
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<p:inputTextarea value="#{panelDeControlCedulaMB.origen}" cols="30"
+				rows="2" id="Ruta3Carga" disabled="disabled"
+				style="font: normal 9px Helvetica, Arial, sans-serif;resize: none;background-color:#dddddd;width:98%; text-align:left; border: none;height:25px"
+				readonly="#{panelDeControlCedulaMB.readOnly}" />
+		</td>
+	</tr>
+	<tr class="row" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+			<p:outputLabel value="CONTENIDO" />
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<p:inputTextarea value="#{panelDeControlCedulaMB.contenido}"
+				cols="30" rows="4" id="lbCarga_4"
+				style="font: normal 9px Helvetica, Arial, sans-serif;resize: none;background-color:#dddddd;width:98%; text-align:left; border: none;height:25px"
+				readonly="#{panelDeControlCedulaMB.readOnly}" />
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+			<p:outputLabel value="FACTOR" />
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<p:inputText id="lbCarga_5" value="#{panelDeControlCedulaMB.factor}"
+				style="background-color:#dddddd;width:98%; text-align:left; border: none;font-size: 9px;"
+				readonly="#{panelDeControlCedulaMB.readOnly}" />
+		</td>
+	</tr>
+	<tr class="row" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+			<p:outputLabel value="PROCESO" />
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<p:inputText id="lbCarga_6" value="#{panelDeControlCedulaMB.proceso}"
+				style="background-color:#dddddd;width:98%; text-align:left; border: none;font-size: 9px;" 
+				readonly="#{panelDeControlCedulaMB.readOnly}" />
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+			<p:outputLabel value="DESCRIPCION PROCESO" />
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<p:inputTextarea value="#{panelDeControlCedulaMB.descripcionProceso}"
+				cols="30" rows="4" id="lbCarga_7"
+				style="font: normal 9px Helvetica, Arial, sans-serif;resize: none;background-color:#dddddd;width:98%; text-align:left; border: none;height:25px"
+				readonly="#{panelDeControlCedulaMB.readOnly}" />
+		</td>
+	</tr>
+	<tr class="row" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;"><p:outputLabel
+				value="DESCARGA PREDEFINIDA T0+" /></td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<div id="DESCARGATMasCarga" style="font-size: 9px;">
+				DD
+				<p:inputText maxlength="2"
+					value="#{panelDeControlCedulaMB.descargaPredefinidaD}"
+					
+					style="background-color:#dddddd;width:17%; text-align:center; border: none;font-size: 9px;" 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+				&nbsp;<b>,</b>&nbsp;HH
+				<p:inputText maxlength="2"
+					value="#{panelDeControlCedulaMB.descargaPredefinidaH}"
+					style="background-color:#dddddd;width:17%; text-align:center; border: none;font-size: 9px; " 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+				&nbsp;<b>:</b>&nbsp;MM
+				<p:inputText maxlength="2"
+					value="#{panelDeControlCedulaMB.descargaPredefinidaM}"
+					style="background-color:#dddddd;width:17%; text-align:center; border: none;font-size: 9px; " 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+				&nbsp;<b>:</b>&nbsp;SS
+				<p:inputText maxlength="2"
+					value="#{panelDeControlCedulaMB.descargaPredefinidaS}"
+					style="background-color:#dddddd;width:17%; text-align:center; border: none; font-size: 9px;" 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+			</div>
+
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;"><p:outputLabel
+				value="ARCHIVO A DESCARGAR T-N" /></td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<div id="DESCARGATNMenosCarga" style="font-size: 9px;">
+				DD
+				<p:inputText maxlength="2"
+					value="#{panelDeControlCedulaMB.archivoDescargarD}"
+					style="background-color:#dddddd;width:17%; text-align:center; border: none; font-size: 9px;" 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+				&nbsp;<b>,</b>&nbsp;HH
+				<p:inputText maxlength="2"
+					value="#{panelDeControlCedulaMB.archivoDescargarH}"
+					style="background-color:#dddddd;width:17%; text-align:center; border: none; font-size: 9px;" 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+				&nbsp;<b>:</b>&nbsp;MM
+				<p:inputText maxlength="2"
+					value="#{panelDeControlCedulaMB.archivoDescargarM}"
+					style="background-color:#dddddd;width:17%; text-align:center; border: none; font-size: 9px;" 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+				&nbsp;<b>:</b>&nbsp;SS
+				<p:inputText maxlength="2"
+					value="#{panelDeControlCedulaMB.archivoDescargarS}"
+					style="background-color:#dddddd;width:17%; text-align:center; border: none; font-size: 9px;" 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+			</div>
+
+		</td>
+	</tr>
+	<tr class="row" style="font-size: 9px;">
+		<!-- rango de fechas -->
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">
+			<p:outputLabel value="RANGO ACTIVO" />
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<div id="RangoActivoCarga" style="font-size: 9px;">
+				Del
+				<p:inputText styleClass="FechasNoEdit1 hasDatepicker" maxlength="10"
+					id="NoEditMasFICarga" value="29/09/2010" disabled="disabled"
+					style="background-color:#dddddd;width:30%; text-align:center; border: none;font-size: 9px; " />
+				<button type="button" class="ui-datepicker-trigger"
+					disabled="disabled">...</button>
+				&nbsp;<b> al </b>&nbsp;
+				<p:inputText styleClass="FechasNoEdit2 hasDatepicker" maxlength="10"
+					id="NoEditMasFFCarga" value="31/12/2099" disabled="disabled"
+					style="background-color:#dddddd;width:30%; text-align:center; border: none;font-size: 9px; " />
+				<button type="button" class="ui-datepicker-trigger"
+					disabled="disabled">...</button>
+				&nbsp;<b></b>&nbsp; <img lang="aa"
+					onclick="HabilitarEdicionRangoActivo()" title="Editar Rango Activo"
+					src="../Images/PanelDeControl/edit.png"
+					style="height: 20px; width: 15px; margin: -50% 0% 2% 90%;" />
+			</div>
+
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">HISTORICO
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<div id="HISTORICOCarga" style="width: 100%; font-size: 9px;">
+				<p:inputTextarea value="#{panelDeControlCedulaMB.historico}"
+					cols="30" rows="2" id="lbCarga_11"
+					style="font: normal 9px Helvetica, Arial, sans-serif;
+					resize: none;background-color:#dddddd;width:98%; text-align:left; border: none;height:25px" 
+					readonly="#{panelDeControlCedulaMB.readOnly}" />
+
+			</div>
+
+		</td>
+	</tr>
+	<tr class="row" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">AREA
+			RESPONSABLE</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<div id="AREARESPONSABLE" style="width: 100%; font-size: 9px;">
+
+        	<p:selectOneMenu id="areResponsable" value="#{panelDeControlCedulaMB.idArea}" 
+        			disabled="#{panelDeControlCedulaMB.readOnly}" >
+				    <f:selectItem itemLabel="--Seleccionar--" itemValue="0"/>
+					<f:selectItems value="#{panelDeControlCedulaMB.listCatAreaResponsable}" 
+					var="areaResponsable" itemLabel="#{areaResponsable.descripcion}" itemValue="#{areaResponsable.idArea}"/>
+        	</p:selectOneMenu>
+			</div>
+
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 30%; height: 25x; font-size: 9px;">RESPONSABLE
+		</td>
+		<td
+			style="text-align: left; width: 70%; height: 25px; font-size: 9px;">
+			<div id="RESPONSABLE" style="width: 100%; font-size: 9px;">
+
+        <p:selectOneMenu id="responsable" value="#{panelDeControlCedulaMB.idResponsable}" 
+        			disabled="#{panelDeControlCedulaMB.readOnly}" >
+        		    <f:selectItem itemLabel="--Seleccionar--" itemValue="0"/>
+					<f:selectItems value="#{panelDeControlCedulaMB.listCatResponsable}" 
+					var="responsable" itemLabel="#{responsable.nombre}" itemValue="#{responsable.idResp}"/>
+
+        </p:selectOneMenu>
+			</div>
+
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 250px; font-size: 9px;">LAYOUT
+		</td>
+		<td style="text-align: left" id="tdDownloadFileLayout_1Carga">
+			<div id="SubirArchivoCarga">
+				<!-- 					<img src="../Images/PanelDeControl/DescargaFiles.png" id="imgObtenerLayout1_1" style="width:25px;  height:25px; cursor:pointer;" onclick="obtieneArchivoAd(this,1);"/>&nbsp; -->
+				<p:commandLink ajax="false">
+					<p:graphicImage value="../Images/PanelDeControl/DescargaFiles.png"
+						id="imgObtenerLayout1_1Carga"
+						style="width:25px;  height:25px; cursor:pointer;" />
+					<p:fileDownload value="#{panelDeControlCedulaMB.file}" />
+				</p:commandLink>
+				<span style="font-size: 9px;">DESCARGAR LAYOUT</span>
+			</div>
+
+		</td>
+	</tr>
+	<tr class="alternateRow" style="font-size: 9px;">
+		<td style="text-align: left; width: 250px; font-size: 9px;">ARCHIVO
+			MUESTRA</td>
+		<td style="text-align: left; font-size: 9px;"
+			id="tdDownloadFileMuestra_1Carga">
+			<div id="SubirArchivoMuCarga" style="width: 100%; font-size: 9px;">
+				<p:commandLink ajax="false">
+					<p:graphicImage value="../Images/PanelDeControl/DescargaFiles.png"
+						id="imgSubirLayout2_1Carga"
+						style="width:25px;  height:25px; cursor:pointer;"
+						onclick="obtieneArchivoAd(this,2);" />&nbsp;<span
+						style="font-size: 9px;">DESCARGAR ARCHIVO</span>
+					<p:fileDownload value="#{panelDeControlCedulaMB.archivoMuestra}" />
+				</p:commandLink>
+			</div>
+
+		</td>
+	</tr>
+	<tr>
+	<td>
+	<p:commandButton value="Editar Cédula" action="#{panelDeControlCedulaMB.setReadOnly(false)}" 
+	styleClass="classButton" update=":form1:panelCedulaCarga" rendered="#{panelDeControlCedulaMB.readOnly}"/>
+	<p:commandButton value="Guardar Cédula" styleClass="classButton"  
+	rendered="#{!panelDeControlCedulaMB.readOnly}"
+	action="#{panelDeControlCedulaMB.guardarCambiosCedula()}"/>
+	</td>
+	<td>
+	<p:commandButton value="Cancelar" styleClass="classButton" onclick="PF('dlgCedulaCarga').hide();"
+	action="#{panelDeControlCedulaMB.setReadOnly(true)}" update=":form1:panelCedulaCarga"/>
+	</td>
+	</tr>
+</table>
+</p:panel>
+</html>

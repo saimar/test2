@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:body>
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+			<!-- 			<h:form id="formMsj" prependId="false"> -->
+			<!-- 				<br /> -->
+			<!-- 				<br /> -->
+			<!-- 				<p:messages id="mensajes" showDetail="true" autoUpdate="true" /> -->
+			<!-- 			</h:form> -->
+
+			<br></br>
+			<br></br>
+			<br></br>
+
+
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<div align="center">
+
+				<div align="center">
+					<p:commandButton id="toltipNuevoResponsable"
+						value="Nuevo Responsable" onclick="PF('dlg7').show();"
+						position="center" align="center" Class="classButtonUsuarios"
+						resizable="false" showEffect="clip" hideEffect="clip"
+						minHeight="100" maximizable="150" icon="ui-icon-new"
+						resetValues="true"
+						actionListener="#{mantenimientoCatalogoResponsable.limpiar}"
+						update=":form1:nomAgrega,numEmpleAgrega,extAgrega,ubicaAgrega,nomValidate,numEmpleValidate,extValidate,ubicaValidate,panelGridAgregarNuevo">
+					</p:commandButton>
+
+					<p:tooltip id="toolTipGrow" for="toltipNuevoResponsable"
+						value="Agregar Nueva Area" showEffect="clip" position="top" />
+				</div>
+				<div>
+
+					<p:dataTable id="RefrehsTable" var="responsable"
+						value="#{mantenimientoCatalogoResponsable.listCatResponsable}"
+						rows="10"
+						style="border-radius: 80px; padding: 10px; max-width: 800px; color: #FFFFFF;"
+						minHeight="200" maximizable="300" paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="1,5,10,15" styleClass="table table-hover"
+						selection="#{mantenimientoCatalogoResponsable.seleccionadoResponsable}"
+						rowKey="#{responsable.idResponsable}" update=":form1">				>
+					<p></p>
+						<f:facet name="header"
+							style="text-align:center; background-color:#C6C3C6;padding:12px;">
+           				Responsable
+      			 	</f:facet>
+						<p></p>
+
+						<p:column headerText="NOMBRE DEL RESPONSABLE" styleClass="label">
+
+							<h:outputText value="#{responsable.nombre}"
+								styleClass="columnTable" />
+
+						</p:column>
+
+						<p:column headerText="EXTENCIÓN DEL RESPONSABLE"
+							styleClass="label">
+
+							<h:outputText value="#{responsable.extencion}"
+								styleClass="columnTable" />
+
+						</p:column>
+
+						<p:column headerText="ESTATUS" styleClass="label">
+
+							<h:outputText value="#{responsable.desEstatus}"
+								styleClass="columnTable" />
+
+						</p:column>
+
+						<p:column headerText="EDITAR"
+							style="border-radius: 25px; padding:5px; max-width:25px;">
+							<center>
+								<p:commandButton id="toltipBuscarResponsable" value="Editar"
+									icon="ui-icon-pencil"
+									update=":form1:panelGridActualizaResponsable"
+									onclick="PF('dlg6').show();"
+									action="#{mantenimientoCatalogoResponsable.CargaCatResponsableActualizar}">
+									<f:setPropertyActionListener value="#{responsable}"
+										target="#{mantenimientoCatalogoResponsable.seleccionadoResponsable}" />
+								</p:commandButton>
+								<p:tooltip for="toltipBuscarResponsable"
+									value="Actualizar Responsable" showEffect="clip" position="top" />
+							</center>
+
+
+						</p:column>
+
+					</p:dataTable>
+				</div>
+				<div>
+					<p:dialog id="RefrehsDialogNuevo" header="Nuevo Responsable"
+						widgetVar="dlg7" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="200" maximizable="250"
+						position="center" update="RefrehsTable" modal="true"
+						closable="false">
+						<div>
+							<h:panelGrid columns="2" id="panelGridAgregarNuevo">
+								<p:outputLabel for="nomAgrega" value="Nombre:"
+									styleClass="label" />
+								<p:inputText id="nomAgrega"
+									value="#{mantenimientoCatalogoResponsable.nombreAgregar}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Nombre...">
+<!-- 									<f:validator validatorId="validateCadena" /> -->
+								</p:inputText>
+
+								<p:outputLabel for="numEmpleAgrega" value="Numero de Empleado:"
+									styleClass="label" />
+								<p:inputText id="numEmpleAgrega"
+									value="#{mantenimientoCatalogoResponsable.numEmpleadoAgrega}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Numero de Empleado...">
+<!-- 									<f:validator validatorId="validateNumerico" /> -->
+								</p:inputText>
+
+								<p:outputLabel for="extAgrega" value="Extención:"
+									styleClass="label" />
+								<p:inputText id="extAgrega"
+									value="#{mantenimientoCatalogoResponsable.extencionAgrega}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Extención...">
+								</p:inputText>
+
+								<p:outputLabel for="ubicaAgrega" value="Ubicación:"
+									styleClass="label" />
+								<p:inputText id="ubicaAgrega"
+									value="#{mantenimientoCatalogoResponsable.ubicacionAgrega}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Ubicación...">
+								</p:inputText>
+
+							</h:panelGrid>
+						</div>
+
+
+						<div align="center">
+							<br></br>
+							<p:commandButton value="Aceptar"
+								styleClass="ui-confirmdialog-yes"
+								actionListener="#{mantenimientoCatalogoResponsable.agregarCatResponsable}"
+								update=":form1:RefrehsTable,growl" icon="ui-icon-check">
+							</p:commandButton>
+
+
+
+
+							<p:commandButton value="Cancelar"
+								styleClass="ui-confirmdialog-no" onclick="dlg7.hide()"
+								icon="ui-icon-close"
+								action="#{mantenimientoCatalogoResponsable.limpiar}"
+								update=":form1:RefrehsTable,nomAgrega,numEmpleAgrega,extAgrega,ubicaAgrega" />
+
+						</div>
+					</p:dialog>
+				</div>
+
+
+				<div>
+					<p:dialog id="RefrehsDialogActualiza"
+						header="Actualizar Responsable" widgetVar="dlg6" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="200" maximizable="250"
+						position="center" update="RefrehsTable" modal="true"
+						closable="false">
+						<div>
+							<h:panelGrid columns="2" id="panelGridActualizaResponsable">
+
+
+
+								<p:outputLabel for="nomValidate" value="Nombre:"
+									styleClass="label" />
+								<p:inputText id="nomValidate"
+									value="#{mantenimientoCatalogoResponsable.nombre}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Descripción...">
+									<!-- 							<f:validator validatorId="validateCadena"/> -->
+								</p:inputText>
+
+								<p:outputLabel for="numEmpleValidate"
+									value="Numero de Empleado:" styleClass="label" />
+								<p:inputText id="numEmpleValidate"
+									value="#{mantenimientoCatalogoResponsable.numEmpleado}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Numero de Empleado...">
+									<!-- 								<f:validator validatorId="validateNumerico"/> -->
+								</p:inputText>
+
+								<p:outputLabel for="extValidate" value="Extención:"
+									styleClass="label" />
+								<p:inputText id="extValidate"
+									value="#{mantenimientoCatalogoResponsable.extencion}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Extención...">
+								</p:inputText>
+
+								<p:outputLabel for="ubicaValidate" value="Ubicación:"
+									styleClass="label" />
+								<p:inputText id="ubicaValidate"
+									value="#{mantenimientoCatalogoResponsable.ubicacion}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Ubicación...">
+								</p:inputText>
+
+
+
+								<p:outputLabel value="Estatus:" styleClass="label" />
+								<p:selectOneMenu
+									value="#{mantenimientoCatalogoResponsable.estatus}"
+									style=" width: 208px; height: 25px;  font-size: 12px;">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItem itemLabel="Alta" itemValue="1" />
+									<f:selectItem itemLabel="Baja" itemValue="0" />
+
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</div>
+						<div align="center">
+							<br></br>
+							<p:commandButton value="Aceptar" icon="ui-icon-check"
+								actionListener="#{mantenimientoCatalogoResponsable.actualizarCatResponsable}"
+								styleClass="ui-confirmdialog-yes"
+								update=":form1:RefrehsTable,nomValidate,numEmpleValidate,extValidate,ubicaValidate,growl">
+							</p:commandButton>
+
+							<p:commandButton value="Cancelar" icon="ui-icon-close"
+								styleClass="ui-confirmdialog-yes"
+								actionListener="#{mantenimientoCatalogoResponsable.limpiar}"
+								onclick="dlg6.hide()" />
+
+						</div>
+
+
+
+
+
+
+
+					</p:dialog>
+				</div>
+			</div>
+
+
+		</ui:define>
+
+		<ui:define name="footer">
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

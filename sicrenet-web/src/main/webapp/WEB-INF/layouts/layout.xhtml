@@ -1,0 +1,147 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:sec="http://www.springframework.org/security/tags"
+    xmlns:acegijsf="http://sourceforge.net/projects/jsf-comp/acegijsf"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    template="/WEB-INF/layouts/standard.xhtml">
+    
+	<ui:define name="content">
+		
+		<h:outputScript library="js" name="calendar_es.js" target="head"/>
+		
+		<h:outputScript target="head">
+			
+			$(document).on('pfAjaxComplete.' + this.id, function(e, xhr, settings) {
+			});
+			
+			$(document).on('pfAjaxError.' + this.id, function(e, xhr, settings) {
+				if(xhr.status==403){
+					PF('dialog403').show();
+				}
+			})
+			
+		</h:outputScript>
+		
+    	<div id="header">
+    		<div class="logoReg">
+    			<p:graphicImage id="imgRAZ" library="styles/images" name="logo.png" alt="RAZ" />
+    			<div class="Pais">Salvador</div>
+    		</div>
+    		<h:form>
+	    		<div id="usuariofecha">
+	    			<!-- Set User -->
+	    			<p>
+	    				Usuario: #{sessionController.currentUserFullName}
+	    			</p>
+	    			
+	    			<!-- Set Date -->
+	    			<p>
+	    				Fecha Asignada:
+	    				<h:outputText id="currentWorkDate" value="#{reportGenerator.workDate}">
+	    					<f:convertDateTime pattern="yyyy-MM-dd" />
+	    				</h:outputText>
+	    			</p>
+	    		</div>
+	    		<div id="AsignarFecha">
+	    			<div class="contenido">
+	    				<p:calendar id="workDate" widgetVar="workdate" showOn="button" size="10" maxdate="today" readonlyInput="true" value="#{reportGenerator.workDate}" pattern="yyyy-MM-dd" locale="es" />
+	    				<p:commandButton value="Establecer" process="workDate" update="currentWorkDate" />
+	    			</div>
+	    		</div>
+    		</h:form>
+    		<div class="logoBAZ">
+    			<p:graphicImage id="imgRegulatorios" library="styles/images" name="logoBAZ.png" alt="Regulatorios Azteca Salvador" />
+    		</div>
+    		<div id="iniciosalida">
+    			<h:form>
+    				<p:commandButton id="btnInicio" styleClass="btnInicio" actionListener="#{reportGenerator.setHome()}" update="mainContainer" />
+    				<p:commandButton id="btnSalir" action="#{sessionController.doLogout}" ajax="false" styleClass="btnSalir" />
+    			</h:form>
+    		</div>
+    		<div class="VersionBalanza">
+    			Version de la Balanza:
+    		</div>
+    	</div>
+    	<div id="Centro">
+    		<div id="Izquierdo">
+    			<h:form>
+    				<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+					<p:tieredMenu style="width:205px">
+						
+						<c:forEach var="subMenu" items="#{sessionController.userBean.menu}">
+							
+							<p:submenu label="#{subMenu.description}">
+								
+								<c:forEach var="menuItem" items="#{subMenu.submenus}">
+									
+									<c:if test="${menuItem.submenus.size() == 0}" >
+										<p:menuitem value="#{menuItem.description}" update="mainContainer" onsuccess="handleSaveRequest(xhr,status)" action="#{menuItem.select}" />
+									</c:if>
+									
+									<c:if test="${menuItem.submenus.size() > 0}" >
+										
+										<p:submenu label="#{menuItem.description}" >
+											
+											<c:forEach var="subMenuItem" items="#{menuItem.submenus}">
+											
+												<c:if test="${subMenuItem.submenus.size() == 0}" >
+													<p:menuitem value="#{subMenuItem.description}" update="mainContainer" onsuccess="handleSaveRequest(xhr,status)" action="#{subMenuItem.select}" />
+												</c:if>
+												
+												<c:if test="${subMenuItem.submenus.size() > 0}" >
+													<p:submenu label="#{subMenuItem.description}" >
+														<c:forEach var="subMenuMenuItem" items="#{subMenuItem.submenus}">
+															<p:menuitem value="#{subMenuMenuItem.description}" update="mainContainer" onsuccess="handleSaveRequest(xhr,status)" action="#{subMenuMenuItem.select}" />
+														</c:forEach>
+													</p:submenu>
+												</c:if>
+												
+											</c:forEach>
+											
+										</p:submenu>
+										
+									</c:if>
+									
+								</c:forEach>
+								
+							</p:submenu>
+							
+						</c:forEach>
+						
+					</p:tieredMenu>
+					
+			    </h:form>
+			    <h:outputScript target="head">
+					function handleSaveRequest(xhr,status) {
+						var xml = $.parseXML(xhr.responseText);
+						var error = xml.getElementsByTagName('error');
+						
+						if(typeof $(error) != typeof undefined)
+							if($(error).prop('tagName') == "error")
+								document.location=xhr.pfSettings.url;
+						
+					}
+				</h:outputScript>
+    		</div>
+    		<div id="Derecho">
+    			<p:panel id="mainContainer">
+    				<p:breadCrumb>
+    					<p:menuitem value="/" url="#" />
+    					<p:menuitem value="#{reportGenerator.reportBuilder.name}" url="#" />
+    				</p:breadCrumb>
+    				<ui:insert name="main"></ui:insert>
+				</p:panel>
+    		</div>
+    		<h:outputScript library="js" name="custom-components.js" target="head"/>
+    	</div>
+    	<div id="footer">
+    		<div>Derechos Reservados Banco Azteca</div>
+    	</div>
+    </ui:define>
+
+</ui:composition>

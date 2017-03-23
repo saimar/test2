@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:body>
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+			<!-- 			<h:form id="formMsj" prependId="false"> -->
+			<!-- 				<br /> -->
+			<!-- 				<br /> -->
+			<!-- 				<p:messages id="mensajes" showDetail="true" autoUpdate="true" /> -->
+			<!-- 			</h:form> -->
+
+			<br></br>
+			<br></br>
+			<br></br>
+			<p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" />
+
+			<div align="center">
+				<div align="center">
+					<p:commandButton id="toltipNuevaFuente" value="Nueva Fuente"
+						onclick="PF('dlg7').show();" position="center" align="center"
+						Class="classButtonUsuarios" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="100" maximizable="150"
+						icon="ui-icon-new"
+						actionListener="#{mantenimientoCatalogoFuente.limpiar}">
+					</p:commandButton>
+
+					<p:tooltip id="toolTipGrow" for="toltipNuevaFuente"
+						value="Agregar Nueva Fuente" showEffect="clip" position="top" />
+				</div>
+				<div>
+					<p:dataTable id="RefrehsTable" var="fuente"
+						value="#{mantenimientoCatalogoFuente.listaFuente}" rows="10"
+						style="border-radius: 80px; padding: 10px; max-width: 800px; color: #FFFFFF;"
+						minHeight="200" maximizable="300" paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="1,5,10,15" styleClass="table table-hover"
+						selection="#{mantenimientoCatalogoFuente.seleccionaFuente}"
+						rowKey="#{fuente.idFuente}" update=":form1">
+						<p></p>
+						<f:facet name="header"
+							style="text-align:center; background-color:#C6C3C6;padding:12px;">
+           				Fuente
+      			 	</f:facet>
+						<p></p>
+
+
+
+
+
+						<p:column headerText="NIVEL" styleClass="label">
+							<center>
+								<h:outputText value="#{fuente.nivel}" styleClass="columnTable" />
+							</center>
+						</p:column>
+
+
+						<p:column headerText="CEDULA" styleClass="label">
+
+							<h:outputText value="#{fuente.nombre}" styleClass="columnTable" />
+						</p:column>
+
+						<p:column headerText="NUMERO DE FACE" styleClass="label">
+							<center>
+								<h:outputText value="#{fuente.idFace}" styleClass="columnTable" />
+							</center>
+						</p:column>
+
+
+
+						<p:column headerText="ETAPA" styleClass="label">
+
+							<h:outputText value="#{fuente.etapa}" styleClass="columnTable" />
+						</p:column>
+
+						<p:column headerText="STORE" styleClass="label">
+
+							<h:outputText value="#{fuente.store}" styleClass="columnTable" />
+						</p:column>
+
+						<p:column headerText="ORDEN" styleClass="label">
+
+							<h:outputText value="#{fuente.orden}" styleClass="columnTable" />
+						</p:column>
+
+						<p:column headerText="TITULO" styleClass="label">
+
+							<h:outputText value="#{fuente.titulo}" styleClass="columnTable" />
+						</p:column>
+
+						<p:column headerText="ESTATUS" styleClass="label">
+							<center>
+								<h:outputText value="#{fuente.desEstatus}"
+									styleClass="columnTable" />
+							</center>
+						</p:column>
+						<p:column headerText="EDITAR" styleClass="label">
+							<center>
+								<p:commandButton id="toltipBuscarFuente" value="Editar"
+									icon="ui-icon-pencil" update=":form1:panelGridActualizaFuente"
+									onclick="PF('dlg6').show();"
+									action="#{mantenimientoCatalogoFuente.CargaFuenteActualizar}">
+									<f:setPropertyActionListener value="#{fuente}"
+										target="#{mantenimientoCatalogoFuente.seleccionaFuente}" />
+								</p:commandButton>
+								<p:tooltip for="toltipBuscarFuente" value="Actualizar Fuente"
+									showEffect="clip" position="top" />
+							</center>
+
+
+						</p:column>
+
+					</p:dataTable>
+				</div>
+				<div>
+					<p:dialog id="RefrehsDialogNuevo" header="Nueva Fuente"
+						widgetVar="dlg7" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="200" maximizable="250"
+						position="center" update="RefrehsTable" modal="true"
+						closable="false">
+						<div>
+							<h:panelGrid columns="2" id="panelGridAgregarNuevo">
+
+								<p:outputLabel value="Nivel:" styleClass="label" />
+								<p:selectOneMenu
+									style=" width: 208px; height: 25px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoFuente.idNievelAgregar}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems
+										value="#{mantenimientoCatalogoFuente.listaNivel}"
+										var="listaNivel" itemValue="#{listaNivel.id_Nivel}"
+										itemLabel="#{listaNivel.nombre}" />
+								</p:selectOneMenu>
+
+
+								<p:outputLabel value="Cedula:" styleClass="label" />
+								<p:selectOneMenu
+									style=" width: 208px; height: 25px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoFuente.idCedulaAgrega}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems
+										value="#{mantenimientoCatalogoFuente.listaCedula}"
+										var="listaCedula" itemValue="#{listaCedula.idCedula}"
+										itemLabel="#{listaCedula.nombre}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Store: " styleClass="label" />
+								<p:inputText value="#{mantenimientoCatalogoFuente.storeAgrega}"
+									style=" width: 200px; height: 18px;  font-size: 12px;"
+									placeholder="Descripción..." />
+
+
+
+							</h:panelGrid>
+						</div>
+						<div align="center">
+							<br></br>
+							<p:commandButton value="Aceptar"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+								actionListener="#{mantenimientoCatalogoFuente.agregarCatalogoFuente}"
+								update=":form1:RefrehsTable">
+							</p:commandButton>
+
+
+
+
+							<p:commandButton value="Cancelar" icon="ui-icon-close"
+								styleClass="ui-confirmdialog-no" onclick="dlg7.hide()"
+								action="#{mantenimientoCatalogoFuente.limpiar}"
+								update=":form1:RefrehsTable" />
+
+
+						</div>
+					</p:dialog>
+				</div>
+
+
+				<div>
+
+					<p:dialog id="RefrehsDialogActualiza" header="Actualizar Fuente"
+						widgetVar="dlg6" resizable="false" showEffect="clip"
+						hideEffect="clip" minHeight="200" maximizable="250"
+						position="center" update="RefrehsTable" modal="true"
+						closable="false">
+						<div>
+							<h:panelGrid columns="2" id="panelGridActualizaFuente">
+
+								<p:outputLabel value="Nivel:" styleClass="label" />
+								<p:selectOneMenu
+									style="width: 208px; height: 25px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoFuente.idNievelActualiza}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems
+										value="#{mantenimientoCatalogoFuente.listaNivel}"
+										var="listaNivel" itemValue="#{listaNivel.id_Nivel}"
+										itemLabel="#{listaNivel.descripcion}" />
+								</p:selectOneMenu>
+
+
+								<p:outputLabel value="Cedula:" styleClass="label" />
+								<p:selectOneMenu
+									style="width: 208px; height: 25px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoFuente.idCedulaActualiza}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems
+										value="#{mantenimientoCatalogoFuente.listaCedula}"
+										var="listaCedula" itemValue="#{listaCedula.idCedula}"
+										itemLabel="#{listaCedula.nombre}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Estatus:" styleClass="label" />
+								<p:selectOneMenu
+									style="width: 208px; height: 25px;  font-size: 12px;"
+									value="#{mantenimientoCatalogoFuente.estatusActualiza}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItem itemLabel="Alta" itemValue="1" />
+									<f:selectItem itemLabel="Baja" itemValue="0" />
+
+								</p:selectOneMenu>
+
+							</h:panelGrid>
+						</div>
+						<div align="center">
+							<br></br>
+							<p:commandButton value="Aceptar" icon="ui-icon-check"
+								actionListener="#{mantenimientoCatalogoFuente.actualizaCatalogoFuente}"
+								styleClass="ui-confirmdialog-yes" update=":form1:RefrehsTable">
+							</p:commandButton>
+
+							<p:commandButton value="Cancelar" icon="ui-icon-close"
+								styleClass="ui-confirmdialog-yes"
+								action="#{mantenimientoCatalogoFuente.limpiar}"
+								onclick="dlg6.hide()" />
+
+						</div>
+					</p:dialog>
+				</div>
+
+			</div>
+		</ui:define>
+
+		<ui:define name="footer">
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

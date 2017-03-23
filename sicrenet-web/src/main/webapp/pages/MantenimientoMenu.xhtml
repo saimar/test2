@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:body>
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	<link href="resources/css/Mantenimiento.css" rel="stylesheet"
+		type="text/css" />
+
+	<h:outputStylesheet name="StyleCalendar.css" />
+	<h:outputStylesheet name="Mantenimiento.css" library="css" />
+
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+			<!-- 			<h:form id="formMsj" prependId="false"> -->
+			<!-- 				<br /> -->
+			<!-- 				<br /> -->
+			<!-- 				<p:messages id="mensajes" showDetail="true" autoUpdate="true" /> -->
+			<!-- 			</h:form> -->
+
+
+
+
+
+
+			<p:growl id="growl" showDetail="true" sticky="true" />
+
+			<div align="center">
+				<p:panel id="panelPricip" header="ADMINISTRACIÓN DE MENU"
+					style="border-radius: 30px; padding: 10px; max-width: 500px;"
+					minHeight="10" maximizable="100" visible="true">
+					<p:panelMenu style="width:300px">
+						<p:submenu label="Actualizar"
+							style="border-radius: 10px; padding: 10px; max-width: 135px; width: 85%; height: 18px; font-size: 8px"
+							minHeight="100" maximizable="40" icon="ui-icon-pencil">
+							<p:menuitem value="Actualizar" onclick="PF('dlg').show();"
+								icon="ui-icon-pencil"
+								actionListener="#{mantenimientoMenu.limpiar}"
+								update="actualizaMenu" />
+						</p:submenu>
+
+					</p:panelMenu>
+					<div align="center">
+						<p:outputLabel value="Seleccione si es un Menu Principal:   "
+							styleClass="label" />
+						<center>
+							<p:selectBooleanCheckbox value="#{mantenimientoMenu.enebleMenu}"
+								style="background: gray">
+								<p:ajax update="panelAgregaMenu"
+									listener="#{mantenimientoMenu.eneablePadre}" />
+							</p:selectBooleanCheckbox>
+						</center>
+					</div>
+
+					<center>
+						<div>
+							<h:panelGrid id="panelAgregaMenu" columns="2" cellpadding="100">
+								<p></p>
+
+
+								<img alt="" class="imgMMenu" src="../Images/Menu/IconMenuG.png" />
+								<p:outputLabel value="Menu 1:" styleClass="label" />
+
+								<p></p>
+
+								<p:selectOneMenu id="menu1"
+									style="width: 108%; height: 25px; font-size: 14px;"
+									disabled="#{mantenimientoMenu.enableMenuVariable}"
+									value="#{mantenimientoMenu.idMenuPadreNivel1}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems value="#{mantenimientoMenu.listaPadreNivel1}"
+										var="listaMenuPadre" itemValue="#{listaMenuPadre.idmenu}"
+										itemLabel="#{listaMenuPadre.descripcion}" />
+									<p:ajax listener="#{mantenimientoMenu.nivelHijo}"
+										update="menu2,menu3,posicionValidate,urlValidate" />
+								</p:selectOneMenu>
+								<img alt="" class="imgMMenu" src="../Images/Menu/IconMenuG.png" />
+								<p:outputLabel value=" Menu 2:   " styleClass="label" />
+								<p></p>
+								<p:selectOneMenu id="menu2"
+									style="width: 108%; height: 25px; font-size: 14px;"
+									Font-Names="Arial"
+									disabled="#{mantenimientoMenu.enableMenuVariable}"
+									value="#{mantenimientoMenu.idMenuHijoNivel2}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems value="#{mantenimientoMenu.listaHijoNivel2}"
+										var="listaMenuHijo" itemValue="#{listaMenuHijo.idmenu}"
+										itemLabel="#{listaMenuHijo.descripcion}" />
+									<p:ajax listener="#{mantenimientoMenu.nivelNieto}"
+										update="menu3,posicionValidate,urlValidate" />
+								</p:selectOneMenu>
+								<img alt="" class="imgMMenu" src="../Images/Menu/IconMenuG.png" />
+								<p:outputLabel value=" Menu 3:   " styleClass="label" />
+								<p></p>
+								<p:selectOneMenu id="menu3"
+									style="width: 108%; height: 25px; font-size: 14px;"
+									Font-Names="Arial"
+									disabled="#{mantenimientoMenu.enableMenuVariable}"
+									value="#{mantenimientoMenu.idMenuNietoNivel3}">
+									<f:selectItem itemLabel="--Selecciona..." />
+									<f:selectItems value="#{mantenimientoMenu.listaNietoNivel3}"
+										var="listaMenuNieto" itemValue="#{listaMenuNieto.idmenu}"
+										itemLabel="#{listaMenuNieto.descripcion}" />
+
+								</p:selectOneMenu>
+
+								<img alt="" class="imgMMenu" src="../Images/Menu/IconMenuG.png" />
+								<p:outputLabel for="urlValidate" value=" Url:  "
+									styleClass="label" icon="ui-icon-document" />
+								<p></p>
+								<p:inputText id="urlValidate"
+									value="#{mantenimientoMenu.urlNuevoMenu}"
+									style=" width: 245px; height: 18px;  font-size: 12px;"
+									placeholder="../pages/NombrePage.xhtml">
+
+								</p:inputText>
+								<img alt="" class="imgMMenu" src="../Images/Menu/IconMenuG.png" />
+								<p:outputLabel for="posicionValidate" value=" Posicion:  "
+									styleClass="label" />
+								<p></p>
+								<p:inputText id="posicionValidate"
+									value="#{mantenimientoMenu.posicionNuevoMenu}"
+									style=" width: 245px; height: 18px;  font-size: 12px;"
+									placeholder="Ingresa la posición del Menu...">
+
+								</p:inputText>
+								<p></p>
+								<img alt="" class="imgMMenu" src="../Images/Menu/IconMenuG.png" />
+								<p:outputLabel for="descripcionValidate" value=" Descripción:  "
+									styleClass="label" />
+								<p></p>
+								<p:inputText id="descripcionValidate"
+									value="#{mantenimientoMenu.descripcionNuevoMenu}"
+									style=" width: 245px; height: 18px;  font-size: 12px;"
+									placeholder="Nombre del Menu...">
+									<!-- 								<f:validator validatorId="validateCadena"/> -->
+								</p:inputText>
+
+
+							</h:panelGrid>
+						</div>
+
+
+					</center>
+
+					<div align="center">
+						<br></br>
+						<p:commandButton title="Agregar Un Nuevo Menu"
+							icon="ui-icon-check" styleClass="ui-confirmdialog-yes"
+							value="Agregar" actionListener="#{mantenimientoMenu.AgregaMenu}"
+							update="panelAgregaMenu,menu1,menu2,menu3,growl,descripcionValidate,posicionValidate">
+							<p:confirm header="Confirmar"
+								message="¿Desea Agregar un Nuevo Menu?" icon="ui-icon-alert" />
+						</p:commandButton>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Aseptar" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Cancelar" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+
+
+					</div>
+
+
+
+				</p:panel>
+
+
+
+
+				<p:dialog id="RefrehsDialogActualiza" header="Actualizar Menu"
+					widgetVar="dlg" resizable="false" showEffect="clip"
+					hideEffect="clip" minHeight="200" maximizable="250"
+					position="center" update="RefrehsTable" modal="true"
+					closable="false">
+
+
+					<div>
+
+						<h:panelGrid id="actualizaMenu" columns="2" cellpadding="100">
+
+
+
+							<p:outputLabel value=" Menu 1:" styleClass="label" />
+							<p:selectOneMenu id="padre"
+								style="width: 108%; height: 25px; font-size: 14px;"
+								Font-Names="Arial"
+								value="#{mantenimientoMenu.listaMenuPadreActualizaNuevoMenu}">
+								<f:selectItem itemLabel="--Selecciona..." />
+								<f:selectItems
+									value="#{mantenimientoMenu.listaMenuActualizaPadre}"
+									var="listaMenuPadre" itemValue="#{listaMenuPadre.idmenu}"
+									itemLabel="#{listaMenuPadre.descripcion}" />
+								<p:ajax listener="#{mantenimientoMenu.llenaComboHijo}"
+									update="hijo,idUrl,idPosicion,idDescipcion" />
+							</p:selectOneMenu>
+							<p:outputLabel value=" Menu 2:   " styleClass="label" />
+
+							<p:selectOneMenu id="hijo"
+								style="width: 108%; height: 25px; font-size: 14px;"
+								Font-Names="Arial"
+								value="#{mantenimientoMenu.listaMenuHijoActualizaNuevoMenu}">
+								<f:selectItem itemLabel="--Selecciona..." />
+								<f:selectItems
+									value="#{mantenimientoMenu.listaMenuActualizaHijo}"
+									var="listaMenuHijo" itemValue="#{listaMenuHijo.idmenu}"
+									itemLabel="#{listaMenuHijo.descripcion}" />
+								<p:ajax listener="#{mantenimientoMenu.llenaComboNieto}"
+									update="nietos,idUrl,idPosicion,idDescipcion" />
+							</p:selectOneMenu>
+							<p:outputLabel value=" Menu 3:   " styleClass="label" />
+
+							<p:selectOneMenu id="nietos"
+								style="width: 108%; height: 25px; font-size: 14px;"
+								Font-Names="Arial"
+								value="#{mantenimientoMenu.listaMenuNietoActualizaNuevoMenu}">
+								<f:selectItem itemLabel="--Selecciona..." />
+								<f:selectItems
+									value="#{mantenimientoMenu.listaMenuActualizaNieto}"
+									var="listaMenuNieto" itemValue="#{listaMenuNieto.idmenu}"
+									itemLabel="#{listaMenuNieto.descripcion}" />
+								<p:ajax listener="#{mantenimientoMenu.llenaComboultimoNieto}"
+									update="idUrl,idPosicion,idDescipcion" />
+							</p:selectOneMenu>
+							<p:outputLabel value=" Url: " styleClass="label" />
+
+							<p:inputText id="idUrl"
+								value="#{mantenimientoMenu.urlActualizaMenu}"
+								style=" width: 245px; height: 18px;  font-size: 12px;" />
+
+							<p:outputLabel value=" Posicion: " styleClass="label" />
+							<p:inputText id="idPosicion"
+								value="#{mantenimientoMenu.posicionActualizaMenu}"
+								style=" width: 245px; height: 18px;  font-size: 12px;" />
+
+							<p:outputLabel value=" Descripción: " styleClass="label" />
+							<p:inputText id="idDescipcion"
+								value="#{mantenimientoMenu.descripcionActulizaMenu}"
+								style=" width: 245px; height: 18px;  font-size: 12px;">
+								<!-- 							<f:validator validatorId="validateCadena"/> -->
+							</p:inputText>
+
+
+
+
+
+						</h:panelGrid>
+					</div>
+					<div align="center">
+						<br></br>
+						<p:commandButton title="Actualizar Menu" icon="ui-icon-check"
+							styleClass="ui-confirmdialog-yes" value=">Actualizar"
+							action="#{mantenimientoMenu.ActualizaMenu}"
+							update="actualizaMenu,idDescipcion,growl">
+							<p:confirm header="Confirmar"
+								message="¿Desea Actualizar el Menu?" icon="ui-icon-alert" />
+						</p:commandButton>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Aseptar" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Cancelar" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+
+
+
+						<p:commandButton title="Eliminiar Menu" icon="ui-icon-trash"
+							styleClass="ui-confirmdialog-yes" value=">Elimnar"
+							action="#{mantenimientoMenu.EliminaMenu}" update="actualizaMenu">
+							<p:confirm header="Confirmar" message="¿Desea Eliminar el Menu?"
+								icon="ui-icon-alert" />
+						</p:commandButton>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Aseptar" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Cancelar" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+						<p:commandButton value="Cancelar" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close"
+							onclick="dlg.hide()" action="#{mantenimientoMenu.limpiar}"
+							update="actualizaMenu" />
+					</div>
+				</p:dialog>
+			</div>
+
+
+
+
+
+		</ui:define>
+
+		<ui:define name="footer">
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:body>
+	<link href="Styles/Grales.css" rel="stylesheet" type="text/css" />
+	<ui:composition template="template/commons/Template.xhtml">
+
+		<ui:define name="MainContent">
+
+			<h:form id="formMsj" prependId="false">
+				<br />
+				<br />
+				<p:messages id="mensajes" showDetail="true" autoUpdate="true" />
+			</h:form>
+
+
+			<center>
+
+
+				<p:dataTable id="RefrehsTable" var="monitor"
+					value="#{mantenimientoMonitorUsuarios.listaUsuariosMonitor}"
+					rows="10"
+					style="border-radius: 80px; padding: 10px; max-width: 800px;"
+					minHeight="200" maximizable="300" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="1,5,10,15" update=":form1">
+					<p></p>
+
+					<p></p>
+					<p:column headerText="Usuario" styleClass="label">
+						<h:outputText value="#{monitor.usuario}"
+							style="width: 15; height: 10px; font-size: 11px;"
+							Font-Names="Arial" required="true" />
+
+					</p:column>
+
+					<p:column headerText="NOMBRE" styleClass="label">
+
+						<h:outputText value="#{monitor.nombre}"
+							style="width: 15; height: 10px; font-size: 11px;"
+							Font-Names="Arial" />
+
+					</p:column>
+
+					<p:column headerText="PERFIL" styleClass="label">
+						<h:outputText value="#{monitor.descripcion}"
+							style="width: 15; height: 10px; font-size: 11px;"
+							Font-Names="Arial" />
+					</p:column>
+
+					<p:column headerText="IP" styleClass="label">
+						<h:outputText value="#{monitor.ip}"
+							style="width: 15; height: 10px; font-size: 11px;"
+							Font-Names="Arial" />
+					</p:column>
+
+					<p:column headerText="SESIÓN" styleClass="label">
+						<h:outputText value="#{monitor.sesionActiva}"
+							style="width: 5; height: 5px; font-size: 11px;"
+							Font-Names="Arial" />
+					</p:column>
+					<p:column headerText="FECHA DE INICIO DE SESIÓN" styleClass="label">
+						<h:outputText value="#{monitor.finicio}"
+							style="width: 5; height: 5px; font-size: 11px;"
+							Font-Names="Arial" />
+					</p:column>
+					<p:column headerText="TIEMPO DE SESIÓN" styleClass="label">
+						<h:outputText value="#{monitor.tiempo}"
+							style="width: 5; height: 5px; font-size: 11px;"
+							Font-Names="Arial" />
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Nuevo Usuario" widgetVar="da" resizable="false"
+		showEffect="clip" hideEffect="clip" minHeight="150" maximizable="100"
+		position="center" style="width: 115%; height: 105px; ">
+
+
+		<h:panelGrid id="pwd" columns="2">
+
+			<p:outputLabel value="Contraseña: *" styleClass="label" />
+			<p:inputText value="#{login.nuevoPwd}"
+				style="width: 105%; height: 18px; font-size: 12px;"
+				Font-Names="Arial" placeholder="Escribe tu Nueva Contraseña" />
+			<p:outputLabel value=" Escribe Nuevamente tu Contraseña: *"
+				styleClass="label" />
+			<p:inputText value="#{login.repiteNuevoPwd}"
+				style="width: 105%; height: 18px; font-size: 12px;"
+				Font-Names="Arial" placeholder="Escribe Nuevamente tu Contraseña" />
+
+			<p:commandButton title="Agregar Un Nuevo Contraseña"
+				icon="ui-icon-disk" styleClass="ui-confirmdialog-yes"
+				value="Aseptar"
+				actionListener="#{login.actualizarContrasenaNuevoUsuario}">
+				<p:confirm header="Confirmar"
+					message="¿Desea Agregar la Nueva Contraseña" icon="ui-icon-alert" />
+			</p:commandButton>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Aseptar" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Cancelar" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+		</h:panelGrid>
+
+	</p:dialog>
+
+			</center>
+			
+		
+			
+
+
+
+
+
+
+
+
+
+		</ui:define>
+
+		<ui:define name="footer">
+
+
+
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+
+</html>

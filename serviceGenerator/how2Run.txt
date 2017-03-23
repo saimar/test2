@@ -1,7 +1,0 @@
-1.- Abrir una consola en la acrpeta actual
-
-2.- ejecutar npm install
-
-3.- lanzar el servidor de node con el siguiente comando
-
-node ./bin/server.js
